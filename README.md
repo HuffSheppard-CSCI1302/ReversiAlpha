@@ -6,7 +6,7 @@ A school-project.  Implements Reversi with some abstract methods and such.  Real
 <!--
 <code>$ java Reversi [Human|RandomComputerPlayer|IntelligentComputerPlayer] [Human|RandomComputerPlayer|IntelligentComputerPlayer]</code> -->
 
-As seen above, you must pass 2 arguments to the program.  The 1st argument determines the behaviour of the Dark player (represented by an 'X' on the game-board), and the 2nd determines the behaviour of the Light player (represented by an 'O' on the game-board).  Dark always goes first.  These arguments must be any of the following:  
+As seen above, you must pass 2 arguments to the program.  The 1st argument determines the behaviour of the Dark player (represented by an 'X' on the game-board), and the 2nd determines the behaviour of the Light player (represented by an 'O' on the game-board).  Dark always goes first.  These arguments must be any of the following (and no, we didn't get to name them ourselves):  
 * <code>Human</code>:  This player is a human player.  
 * <code>RandomComputerPlayer</code>:  This player is a CPU-player, and is to move randomly.  
 * <code>IntelligentComputerPlayer</code>:  This player is a CPU-player, and is to move pseudo-intelligently.  
