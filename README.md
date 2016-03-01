@@ -12,3 +12,7 @@ As seen above, you must pass 2 arguments to the program.  The 1st argument deter
 * <code>IntelligentComputerPlayer</code>:  This player is a CPU-player, and is to move pseudo-intelligently.  
 
 Lastly, this programme requires a terminal emulator to properly enjoy, as it is lacking any sort of a proper GUI.  This is because we are amateurs.  
+
+# Instructions
+This link is only useful for us coders:  
+https://gist.github.com/mepcotterell/3564a8eaa32f49e3d460
