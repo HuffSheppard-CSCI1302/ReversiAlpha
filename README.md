@@ -1,5 +1,5 @@
 # ReversiAlpha
-A GitHub for a school-project.  Implements Reversi with some abstract methods and such.  Really overkill.  
+A school-project.  Implements Reversi with some abstract methods and such.  Really overkill.  
 
 # Usage
 <code>$ java Reversi <i>$1</i> <i>$2</i></code>
