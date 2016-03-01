@@ -10,4 +10,4 @@ You must pass 2 arguments to the program.  These must be any of the following:
 * <code>RandomComputerPlayer</code>
 * <code>IntelligentComputerPlayer</code>
 
-The first argument determines the behaviour of the Dark player, and the second determines the behaviour of the Light player.  Dark always goes first.  
+The 1st argument determines the behaviour of the Dark player, and the 2nd determines the behaviour of the Light player.  Dark always goes first.  
