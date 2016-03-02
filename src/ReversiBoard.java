@@ -1,6 +1,6 @@
 public class ReversiBoard implements Board
 { //class
-  private char[9][9] caaGrid ;
+  private char[9][9] caaGrid;
   /* KEY:  
    * '.' = empty
    * 'X' = Dark (player 1)
@@ -31,7 +31,7 @@ public class ReversiBoard implements Board
     { //loop
       for(int j = 1; j < 9; j++)
       { //loop
-        caaGrid[i][j] = '.' ;
+        caaGrid[i][j] = '.';
       } //loop
     } //loop
   } //method
@@ -48,7 +48,7 @@ public class ReversiBoard implements Board
     { //loop
       for(int j = 0; j < 9; j++)
       { //loop
-        this.caaGrid[i][j] = caaGrid[i][j] ;
+        this.caaGrid[i][j] = caaGrid[i][j];
       } //loop
     } //loop
   } //method
@@ -67,11 +67,11 @@ public class ReversiBoard implements Board
       for(int j = 1; j < 9; j++)
       { //loop
         // If a '_' is found, then there is a move left.  
-        if(caaGrid[i][j] == '_') return true ;
+        if(caaGrid[i][j] == '_') return true;
       } //loop
     } //loop
     // If no '_' found, then there are no moves left.  
-    return false ;
+    return false;
   } //method
   
   ////////////////////////////////////////////////////////////////////////////
@@ -82,15 +82,15 @@ public class ReversiBoard implements Board
   @Override
   public char[9][9] getGrid()
   { //method
-    char[][] caaGrid = new char[9][9] ;
+    char[][] caaGrid = new char[9][9];
     for(int i = 0; i < 9; i++)
     { //loop
       for(int j = 0; j < 9; j++)
       { //loop
-        caaGrid[i][j] = this.caaGrid[i][j] ;
+        caaGrid[i][j] = this.caaGrid[i][j];
       } //loop
     } //loop
-    return caaGrid ;
+    return caaGrid;
   } //method
   
   ////////////////////////////////////////////////////////////////////////////
@@ -112,18 +112,18 @@ public class ReversiBoard implements Board
   @Override
   public String toString()
   { //method
-    String s = '\n' ;
+    String s = '\n';
     for(int i = 0; i < 9; i++)
     { //loop
-      s+= ' ' ;
+      s+= ' ';
       for(int j = 0; j < 9; j++)
       { //loop
-        s+= ' ' ;
-        s+= caaGrid[i][j]) ;
+        s+= ' ';
+        s+= caaGrid[i][j]);
       } //loop
-    s+= '\n' ;
+    s+= '\n';
     } //loop
-    return s + '\n' ;
+    return s + '\n';
   } //method
   
   ////////////////////////////////////////////////////////////////////////////
@@ -138,7 +138,7 @@ public class ReversiBoard implements Board
     { //loop
       for(int j = 1; j < 9; j++)
       { //loop
-        if(caaGrid[i][j] == '_') caaGrid[i][j] = '.' ;
+        if(caaGrid[i][j] == '_') caaGrid[i][j] = '.';
       } //loop
     } //loop
 
@@ -155,6 +155,6 @@ public class ReversiBoard implements Board
   @Override
   public void setCoord(char cPiece, int iaCoord[2])
   { //method
-    caaGrid[iaCoord[0]][iaCoord[1]] = cPiece ;
+    caaGrid[iaCoord[0]][iaCoord[1]] = cPiece;
   } //method
 } //class
