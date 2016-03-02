@@ -23,13 +23,6 @@ public class Reversi
 	private static int     iDarkType  = 1    ;  // Default to random CPU
 	private static int     iLightType = 1    ;  // Default to random CPU
 	
-	/* KEY:  
-	 * '.' = empty
-	 * 'X' = Dark (player 1)
-	 * 'O' = Light (player 2)
-	 * '_' = Possible move
-	 */
-	
 	////////////////////////////////////////////////////////////////////////////
 	/** The main method.  
 	 * @author Miles B Huff
@@ -69,10 +62,7 @@ public class Reversi
 		{ //2+
 			// Figure out if there are any moves left.  If not, the game is over.  
 			oGrid.calcMoves() ;
-			if(!oGrid.canMove())
-			{ //3+
-				oGrid.endGame(oGrid.getScore()) ;
-			} //3-
+			if(!oGrid.canMove()) oGrid.endGame(oGrid.getScore()) ;
 
 			// Refresh the gameboard
 			System.out.println(oGrid.toString()) ;
