@@ -100,7 +100,7 @@ public class ReversiBoard implements Board
   } //method
   
   ////////////////////////////////////////////////////////////////////////////
-  /** 
+  /** Finds all possible moves.  
    * @author Miles B Huff
   **/
   @Override
@@ -114,16 +114,6 @@ public class ReversiBoard implements Board
         if(caaGrid[i][j] == '_') caaGrid[i][j] = '.' ;
       } // 3-
     } // 2-
-    //TODO
-  } //method
-  
-  ////////////////////////////////////////////////////////////////////////////
-  /** 
-   * @author Miles B Huff
-  **/
-  @Override
-  public void endGame()
-  { //method
     //TODO
   } //method
   
