@@ -84,6 +84,7 @@ public class Reversi
 			if(bDarkTurn) bDarkTurn = false ;
 			else          bDarkTurn = true  ;
 		} //2-
+    	} //1-
 
 	////////////////////////////////////////////////////////////////////////////
 	/** Validate and simplify input to just 2 args.  
@@ -91,8 +92,7 @@ public class Reversi
 	 * @param  saArgs  Arguments passed into the program from the commandline.  
 	**/
 	private String[2] checkArgs(String[] saArgs)
-	{ //2+
+	{ //1+
 		//TODO
-	} //2-
-    } //1-
+	} //1-
 } //0-
