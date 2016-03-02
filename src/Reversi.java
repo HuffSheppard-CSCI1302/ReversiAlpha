@@ -21,8 +21,6 @@
 public class Reversi
 { //class
 	private static boolean bDarkTurn  = true;  // Dark goes first
-	private static int     iDarkType  = 1   ;  // Default to random CPU
-	private static int     iLightType = 1   ;  // Default to random CPU
 	
 	////////////////////////////////////////////////////////////////////////////
 	/** The main method.  
@@ -32,7 +30,7 @@ public class Reversi
 	public static void main(String[] saArgs)
 	{ //method
 		// Check saArgs
-		String[] sa = validateArgs(saArgs) ;
+		String[] sa = cleanArgs(saArgs) ;
 		
 		// Create players
 		for(int i = 0; i < sa.length; i++)
@@ -52,7 +50,7 @@ public class Reversi
 					else       Player oLight = new Player.ComputerPlayer.IntelligentComputerPlayer ;
 					break ;
 				default:
-					System.out.println("If you're seeing this, something went wrong.  ") ;
+					System.out.println("Usage:  \n$ java Reversi [Human|RandomComputerPlayer|IntelligentComputerPlayer] [Human|RandomComputerPlayer|IntelligentComputerPlayer]") ;
 					break ;
 			} //switch
 		} //loop
@@ -92,7 +90,7 @@ public class Reversi
 	 * @author Preston Sheppard
 	 * @param  saArgs  Arguments passed into the program from the commandline.  
 	**/
-	private String[2] checkArgs(String[] saArgs)
+	private String[2] cleanArgs(String[] saArgs)
 	{ //method
 		//TODO
 	} //method
