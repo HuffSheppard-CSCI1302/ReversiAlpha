@@ -108,6 +108,7 @@ public class ReversiBoard implements Board
   ////////////////////////////////////////////////////////////////////////////
   /** Converts <code>caaGrid</code> into a <code>String</code>.  
    * @author Miles B Huff
+   * @return a <code>String</code>-representatino of <code>caaGrid</code>.  
   **/
   @Override
   public String toString()
@@ -123,7 +124,7 @@ public class ReversiBoard implements Board
       } // 3-
     s+= '\n' ;
     } // 2-
-    s+= '\n' ;
+    return s + '\n' ;
   } //method
   
   ////////////////////////////////////////////////////////////////////////////
@@ -147,10 +148,10 @@ public class ReversiBoard implements Board
   } //method
   
   ////////////////////////////////////////////////////////////////////////////
-  /** 
+  /** Sets a single space in the grid with the specified <code>char</code>.  
    * @author Miles B Huff
-   * @param  cPiece  
-   * @param  iaCoord 
+   * @param  cPiece  The <code>char</code> with which to fill the space
+   * @param  iaCoord The coordinates of the space to fill
   **/
   @Override
   public void setCoord(char cPiece, int iaCoord[2])
