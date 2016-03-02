@@ -1,5 +1,6 @@
 /** This class represents a game of Reversi.
- * @author Miles B Huff <a href="mailto:MilesBHuff@UGA.edu"><nohtml><</nohtml>email<nohtml>></nohtml></a>
+ * @author Miles B Huff <a href="mailto:MilesBHuff@UGA.edu"><nohtml><</nohtml>email<nohtml>></nohtml></a>, 
+ *         Preston Sheppard
  * @date   2016-02-29
  * @disclaimer
  *  The following code represents our own work.  We have neither received nor 
@@ -88,7 +89,7 @@ public class Reversi
 
 	////////////////////////////////////////////////////////////////////////////
 	/** Validate and simplify input to just 2 args.  
-	 * @author Miles B Huff
+	 * @author Preston Sheppard
 	 * @param  saArgs  Arguments passed into the program from the commandline.  
 	**/
 	private String[2] checkArgs(String[] saArgs)
