@@ -10,7 +10,7 @@ public interface Board
   public  int[2]     getScore()  ;
   public  String     toString()  ;
   public  void       calcMoves() ;
-  public  void       setCoord(char c, int ia[2]) ;
-  public  void       setCoord(char[9][9] caa)    ;
+  public  void       setCoord(char cPiece, int[2] iaCoord) ;
+  public  void       setCoord(char[9][9] caaGrid)          ;
   
 } //interface
