@@ -1,4 +1,5 @@
 #!/bin/env sh
+## Script by Miles B Huff
 echo "Building 'ReversiAlpha'..."
 mkdir build && cd build
 javac ../src/*.java
