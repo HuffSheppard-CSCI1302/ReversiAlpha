@@ -73,10 +73,10 @@ public class Reversi
 			if(bDarkTurn)
 			{ //3+
 				System.out.println("Enter your move, X player:  ") ;
-				grid.update(oDark.getInput()) ;
+				grid.update(oDark.getInput('X', oGrid.getGrid())) ;
 			} else { //3=
 				System.out.println("Enter your move, O player:  ") ;
-				grid.update(oLight.getInput()) ;
+				grid.update(oLight.getInput('O', oGrid.getGrid())) ;
 			} //3-
 			
 			// Change whose turn it is
