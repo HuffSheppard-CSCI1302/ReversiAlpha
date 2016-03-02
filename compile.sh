@@ -1,3 +1,5 @@
 #!/bin/env sh
 mkdir build && cd build
-jar -cf Reversi.jar ../src/*
+javac ../src/*.java
+jar -cf Reversi.jar ../src/*.class
+rm *.class
