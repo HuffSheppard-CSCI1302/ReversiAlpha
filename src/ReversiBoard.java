@@ -1,7 +1,6 @@
 public class ReversiBoard implements Board
 { //class
   private char[9][9] caaGrid ;
-
   /* KEY:  
    * '.' = empty
    * 'X' = Dark (player 1)
@@ -158,5 +157,4 @@ public class ReversiBoard implements Board
   { //method
     caaGrid[iaCoord[0]][iaCoord[1]] = cPiece ;
   } //method
-  
 } //class
