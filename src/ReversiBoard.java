@@ -45,15 +45,33 @@ public class ReversiBoard implements Board
   @Override
   public boolean canMove()
   { //method
-    //TODO
+    // Find '_'
+    for(int i = 1; i < 9; i++)
+    { // 2+
+      for(int j = 1; j < 9; j++)
+      { // 3+
+        // If a '_' is found, then there is a move left.  
+        if(caaGrid[i][j] == '_') return true ;
+      } // 3-
+    } // 2-
+    // If no '_' found, then there are no moves left.  
+    return false ;
   } //method
   
+  ////////////////////////////////////////////////////////////////////////////
+  /** 
+   * @author Miles B Huff
+  **/
   @Override
   public char[9][9] getGrid()
   { //method
     //TODO
   } //method
   
+  ////////////////////////////////////////////////////////////////////////////
+  /** 
+   * @author Miles B Huff
+  **/
   @Override
   public int[2] getScore()
   { //method
@@ -88,6 +106,14 @@ public class ReversiBoard implements Board
   @Override
   public void calcMoves()
   { //method
+    // Wipe '_'
+    for(int i = 1; i < 9; i++)
+    { // 2+
+      for(int j = 1; j < 9; j++)
+      { // 3+
+        if(caaGrid[i][j] == '_') caaGrid[i][j] = '.' ;
+      } // 3-
+    } // 2-
     //TODO
   } //method
   
