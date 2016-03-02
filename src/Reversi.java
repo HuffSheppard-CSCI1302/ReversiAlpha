@@ -94,4 +94,14 @@ public class Reversi
 	{ //method
 		//TODO
 	} //method
+
+	////////////////////////////////////////////////////////////////////////////
+	/** Ends the game.  
+	 * @author Preston Sheppard
+	 * @param  saArgs  Arguments passed into the program from the commandline.  
+	**/
+	private void cleanArgs(int[2] iaScore)
+	{ //method
+		//TODO
+	} //method
 } //class
