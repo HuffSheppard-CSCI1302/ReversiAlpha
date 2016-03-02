@@ -30,7 +30,7 @@ public class Reversi
 	public static void main(String[] saArgs)
 	{ //method
 		// Check saArgs
-		String[] sa = cleanArgs(saArgs) ;
+		String[] sa = cleanArgs(saArgs);
 		
 		// Create players
 		for(int i = 0; i < sa.length; i++)
@@ -38,50 +38,50 @@ public class Reversi
 			switch(sa[i])
 			{ //switch
 				case "Human":
-					if(i == 0) Player oDark  = new Player.HumanPlayer ;
-					else       Player oLight = new Player.HumanPlayer ;
-					break ;
+					if(i == 0) Player oDark  = new Player.HumanPlayer;
+					else       Player oLight = new Player.HumanPlayer;
+					break;
 				case "RandomComputerPlayer":
-					if(i == 0) Player oDark  = new Player.ComputerPlayer.RandomComputerPlayer ;
-					else       Player oLight = new Player.ComputerPlayer.RandomComputerPlayer ;
-					break ;
+					if(i == 0) Player oDark  = new Player.ComputerPlayer.RandomComputerPlayer;
+					else       Player oLight = new Player.ComputerPlayer.RandomComputerPlayer;
+					break;
 				case "IntelligentComputerPlayer":
-					if(i == 0) Player oDark  = new Player.ComputerPlayer.IntelligentComputerPlayer ;
-					else       Player oLight = new Player.ComputerPlayer.IntelligentComputerPlayer ;
-					break ;
+					if(i == 0) Player oDark  = new Player.ComputerPlayer.IntelligentComputerPlayer;
+					else       Player oLight = new Player.ComputerPlayer.IntelligentComputerPlayer;
+					break;
 				default:
-					System.out.println("Usage:  \n$ java Reversi [Human|RandomComputerPlayer|IntelligentComputerPlayer] [Human|RandomComputerPlayer|IntelligentComputerPlayer]") ;
-					break ;
+					System.out.println("Usage:  \n$ java Reversi [Human|RandomComputerPlayer|IntelligentComputerPlayer] [Human|RandomComputerPlayer|IntelligentComputerPlayer]");
+					break;
 			} //switch
 		} //loop
 
 		// Instantiate a new game
-		Board oGrid = new ReversiBoard ;
-		System.out.println("Welcome to Reversi!  Moves should be entered in \"[row] [column]\" format.  ") ;
+		Board oGrid = new ReversiBoard;
+		System.out.println("Welcome to Reversi!  Moves should be entered in \"[row] [column]\" format.  ");
 		
 		// Core game-loop
 		while(true)
 		{ //loop
 			// Figure out if there are any moves left.  If not, the game is over.  
-			oGrid.calcMoves() ;
-			if(!oGrid.canMove()) oGrid.endGame(oGrid.getScore()) ;
+			oGrid.calcMoves();
+			if(!oGrid.canMove()) oGrid.endGame(oGrid.getScore());
 
 			// Refresh the gameboard
-			System.out.println(oGrid.toString()) ;
+			System.out.println(oGrid.toString());
 
 			// Get player-input and change the grid with it
 			if(bDarkTurn)
 			{ //3+
-				System.out.println("Enter your move, X player:  ") ;
-				grid.update(oDark.getInput('X', oGrid.getGrid())) ;
+				System.out.println("Enter your move, X player:  ");
+				grid.update(oDark.getInput('X', oGrid.getGrid()));
 			} else { //3=
-				System.out.println("Enter your move, O player:  ") ;
-				grid.update(oLight.getInput('O', oGrid.getGrid())) ;
+				System.out.println("Enter your move, O player:  ");
+				grid.update(oLight.getInput('O', oGrid.getGrid()));
 			} //3-
 			
 			// Change whose turn it is
-			if(bDarkTurn) bDarkTurn = false ;
-			else          bDarkTurn = true  ;
+			if(bDarkTurn) bDarkTurn = false;
+			else          bDarkTurn = true ;
 		} //loop
     	} //method
 
