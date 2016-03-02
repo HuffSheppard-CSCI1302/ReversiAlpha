@@ -8,7 +8,6 @@ public interface Board
   public  boolean    canMove()   ;
   public  char[9][9] getGrid()   ;
   public  int[2]     getScore()  ;
-  public  String     toString()  ;
   public  void       calcMoves() ;
   public  void       setCoord(char cPiece, int[2] iaCoord) ;
   public  void       setCoord(char[9][9] caaGrid)          ;
