@@ -38,9 +38,26 @@ public class ReversiBoard implements Board
   } //method
   
   ////////////////////////////////////////////////////////////////////////////
+  /** Constructor-method.  Fills the grid with the parameter.  
+   *  Warning:  Validation is *not* perfomed on this parameter!  
+   * @author Miles B Huff
+   * @param caaGrid The grid you'd like to generate a ReversiBoard from.  
+  **/
+  public ReversiBoard(char[9][9] caaGrid)
+  { //method
+    for(int i = 0; i < 9; i++)
+    { // 2+
+      for(int j = 0; j < 9; j++)
+      { // 3+
+        this.caaGrid[i][j] = caaGrid[i][j] ;
+      } // 3-
+    } // 2-
+  } //method
+
+  ////////////////////////////////////////////////////////////////////////////
   /** Figures out if there are any moves left.  
    * @author Miles B Huff
-   * @return true if there are moves left.  
+   * @return <code>true</code> if there are moves left.  
   **/
   @Override
   public boolean canMove()
@@ -59,18 +76,28 @@ public class ReversiBoard implements Board
   } //method
   
   ////////////////////////////////////////////////////////////////////////////
-  /** 
+  /** Makes and returns a deep copy of <code>caaGrid</code>.  
    * @author Miles B Huff
+   * @return a deep copy of <code>caaGrid</code>
   **/
   @Override
   public char[9][9] getGrid()
   { //method
-    //TODO
+    char[][] caaGrid = new char[9][9] ;
+    for(int i = 0; i < 9; i++)
+    { // 2+
+      for(int j = 0; j < 9; j++)
+      { // 3+
+        caaGrid[i][j] = this.caaGrid[i][j] ;
+      } // 3-
+    } // 2-
+    return caaGrid ;
   } //method
   
   ////////////////////////////////////////////////////////////////////////////
-  /** 
+  /** Calculates and returns the current score.  
    * @author Miles B Huff
+   * @return an array containing Dark and Light's scores, respectively.  
   **/
   @Override
   public int[2] getScore()
@@ -79,7 +106,7 @@ public class ReversiBoard implements Board
   } //method
   
   ////////////////////////////////////////////////////////////////////////////
-  /** Converts the grid into a String.  
+  /** Converts <code>caaGrid</code> into a <code>String</code>.  
    * @author Miles B Huff
   **/
   @Override
@@ -114,17 +141,21 @@ public class ReversiBoard implements Board
         if(caaGrid[i][j] == '_') caaGrid[i][j] = '.' ;
       } // 3-
     } // 2-
+
+    // Calculate '_'
     //TODO
   } //method
   
   ////////////////////////////////////////////////////////////////////////////
   /** 
    * @author Miles B Huff
+   * @param  cPiece  
+   * @param  iaCoord 
   **/
   @Override
-  public void setCoord(int ia[2])
+  public void setCoord(char cPiece, int iaCoord[2])
   { //method
-    //TODO
+    caaGrid[iaCoord[0]][iaCoord[1]] = cPiece ;
   } //method
   
 } //class
