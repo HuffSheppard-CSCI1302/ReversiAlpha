@@ -18,7 +18,7 @@
 **/
 
 public class Reversi
-{ //0+
+{ //class
 	private static boolean bDarkTurn  = true;  // Dark goes first
 	private static int     iDarkType  = 1   ;  // Default to random CPU
 	private static int     iLightType = 1   ;  // Default to random CPU
@@ -29,15 +29,15 @@ public class Reversi
 	 * @param  saArgs Arguments passed into the program from the commandline.  
 	**/
 	public static void main(String[] saArgs)
-	{ //1+
+	{ //method
 		// Check saArgs
 		String[] sa = validateArgs(saArgs) ;
 		
 		// Create players
 		for(int i = 0; i < sa.length; i++)
-		{ //2+
+		{ //loop
 			switch(sa[i])
-			{ //3+
+			{ //switch
 				case "Human":
 					if(i == 0) Player oDark  = new Player.HumanPlayer ;
 					else       Player oLight = new Player.HumanPlayer ;
@@ -53,8 +53,8 @@ public class Reversi
 				default:
 					System.out.println("If you're seeing this, something went wrong.  ") ;
 					break ;
-			} //3-
-		} //2-
+			} //switch
+		} //loop
 
 		// Instantiate a new game
 		Board oGrid = new ReversiBoard ;
@@ -62,7 +62,7 @@ public class Reversi
 		
 		// Core game-loop
 		while(true)
-		{ //2+
+		{ //loop
 			// Figure out if there are any moves left.  If not, the game is over.  
 			oGrid.calcMoves() ;
 			if(!oGrid.canMove()) oGrid.endGame(oGrid.getScore()) ;
@@ -83,8 +83,8 @@ public class Reversi
 			// Change whose turn it is
 			if(bDarkTurn) bDarkTurn = false ;
 			else          bDarkTurn = true  ;
-		} //2-
-    	} //1-
+		} //loop
+    	} //method
 
 	////////////////////////////////////////////////////////////////////////////
 	/** Validate and simplify input to just 2 args.  
@@ -92,7 +92,7 @@ public class Reversi
 	 * @param  saArgs  Arguments passed into the program from the commandline.  
 	**/
 	private String[2] checkArgs(String[] saArgs)
-	{ //1+
+	{ //method
 		//TODO
-	} //1-
-} //0-
+	} //method
+} //class
