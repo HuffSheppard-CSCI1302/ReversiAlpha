@@ -100,7 +100,7 @@ public class Reversi
 	 * @author Preston Sheppard
 	 * @param  saArgs  Arguments passed into the program from the commandline.  
 	**/
-	private void cleanArgs(int[2] iaScore)
+	private void endGame(int[2] iaScore)
 	{ //method
 		//TODO
 	} //method
