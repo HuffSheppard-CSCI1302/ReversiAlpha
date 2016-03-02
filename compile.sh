@@ -1,5 +1,5 @@
 #!/bin/env sh
 mkdir build && cd build
 javac ../src/*.java
-cd ../
+cd ..
 jar -cf Reversi.jar build/*.class
