@@ -38,7 +38,7 @@ public class ReversiBoard implements Board
 	
 	////////////////////////////////////////////////////////////////////////////
 	/** Constructor-method.  Fills the grid with the parameter.  
-	 *	Warning:	Validation is *not* perfomed on this parameter!	
+	 *  Warning:  Validation is *not* perfomed on this parameter!  
 	 * @author Miles B Huff
 	 * @param caaGrid The grid you'd like to generate a ReversiBoard from.  
 	**/
