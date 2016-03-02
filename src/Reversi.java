@@ -18,7 +18,7 @@
 **/
 
 public class Reversi
-{ // 0+
+{ //0+
 	private static boolean bDarkTurn  = true ;  // Dark goes first
 	private static int     iDarkType  = 1    ;  // Default to random CPU
 	private static int     iLightType = 1    ;  // Default to random CPU
@@ -33,47 +33,73 @@ public class Reversi
 	////////////////////////////////////////////////////////////////////////////
 	/** The main method.  
 	 * @author Miles B Huff
-	 * @param  saArgs  A String array.  Unused.  
+	 * @param  saArgs Arguments passed into the program from the commandline.  
 	**/
 	public static void main(String[] saArgs)
-	{ // 1+
+	{ //1+
 		// Check saArgs
-		validateArgs(saArgs) ;
+		String[] sa = validateArgs(saArgs) ;
 		
+		// Create players
+		for(int i = 0; i < sa.length; i++)
+		{ //2+
+			switch(sa[i])
+			{ //3+
+				case "Human":
+					if(i == 0) Player oDark  = new Player.HumanPlayer ;
+					else       Player oLight = new Player.HumanPlayer ;
+					break ;
+				case "RandomComputerPlayer":
+					if(i == 0) Player oDark  = new Player.ComputerPlayer.RandomComputerPlayer ;
+					else       Player oLight = new Player.ComputerPlayer.RandomComputerPlayer ;
+					break ;
+				case "IntelligentComputerPlayer":
+					if(i == 0) Player oDark  = new Player.ComputerPlayer.IntelligentComputerPlayer ;
+					else       Player oLight = new Player.ComputerPlayer.IntelligentComputerPlayer ;
+					break ;
+			} //3-
+		} //2-
+
 		// Instantiate a new game
-		Board grid = new ReversiBoard ;
-		
-		// Fill the grid with blanks and axis-numbers
-		grid.reset() ;
-		
+		Board oGrid = new ReversiBoard ;
 		System.out.println("Welcome to Reversi!  Moves should be entered in \"[row] [column]\" format.  ") ;
 		
 		// Core game-loop
 		while(true)
-			{ // 2+
-			grid.print() ;
+		{ //2+
+			// Figure out if there are any moves left.  If not, the game is over.  
+			oGrid.calcMoves() ;
+			if(!oGrid.canMove())
+			{ //3+
+				oGrid.endGame(oGrid.getScore()) ;
+			} //3-
 
-			char c = 'O' ;
-			if(bDarkTurn) c = 'X' ;
-			System.out.println("Enter your move, " + c + " player:  ") ;
+			// Refresh the gameboard
+			System.out.println(oGrid.toString()) ;
 
-			if(bDarkTurn) 
-				// grid.update() takes the input in, and changes the grid with it
-				grid.update(playerDark.getInput()) ;
-			else
-				// grid.update() takes the input in, and changes the grid with it
-				grid.update(playerLight.getInput()) ;
-
-			// Return true if game is over, and recalculates possible moves.  
-			// If true, printGrid, figure out who won, and print end message
-			// If false, return void to end the method
-			gameFinish(gridEval()) ;
+			// Get player-input and change the grid with it
+			if(bDarkTurn)
+			{ //3+
+				System.out.println("Enter your move, X player:  ") ;
+				grid.update(oDark.getInput()) ;
+			} else { //3=
+				System.out.println("Enter your move, O player:  ") ;
+				grid.update(oLight.getInput()) ;
+			} //3-
 			
 			// Change whose turn it is
-			if(bDarkTurn)
-				 bDarkTurn = false ;
-			else bDarkTurn = true  ;
-		} // 2-
+			if(bDarkTurn) bDarkTurn = false ;
+			else          bDarkTurn = true  ;
+		} //2-
 
-    } // 1-
-} // 0-
+	////////////////////////////////////////////////////////////////////////////
+	/** Validate and simplify input to just 2 args.  
+	 * @author Miles B Huff
+	 * @param  saArgs  Arguments passed into the program from the commandline.  
+	**/
+	private String[2] checkArgs(String[] saArgs)
+	{ //2+
+		//TODO
+	} //2-
+    } //1-
+} //0-
