@@ -11,7 +11,7 @@ public interface Board
   public  String     toString()                       ;
   public  void       calcMoves()                      ;
   public  void       endGame()                        ;
-  public  void       setCoord(int ia[2], char cPiece) ;
-  public  void       setCoord(int caa[9][9])          ;
+  public  void       setCoord(char cPiece, int ia[2]) ;
+  public  void       setCoord(char[9][9] caa)         ;
   
 } //interface
