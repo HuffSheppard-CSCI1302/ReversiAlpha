@@ -19,9 +19,9 @@
 
 public class Reversi
 { //0+
-	private static boolean bDarkTurn  = true ;  // Dark goes first
-	private static int     iDarkType  = 1    ;  // Default to random CPU
-	private static int     iLightType = 1    ;  // Default to random CPU
+	private static boolean bDarkTurn  = true;  // Dark goes first
+	private static int     iDarkType  = 1   ;  // Default to random CPU
+	private static int     iLightType = 1   ;  // Default to random CPU
 	
 	////////////////////////////////////////////////////////////////////////////
 	/** The main method.  
@@ -49,6 +49,9 @@ public class Reversi
 				case "IntelligentComputerPlayer":
 					if(i == 0) Player oDark  = new Player.ComputerPlayer.IntelligentComputerPlayer ;
 					else       Player oLight = new Player.ComputerPlayer.IntelligentComputerPlayer ;
+					break ;
+				default:
+					System.out.println("If you're seeing this, something went wrong.  ") ;
 					break ;
 			} //3-
 		} //2-
