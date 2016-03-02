@@ -1,5 +1,5 @@
 public interface Board
-{ //Interface
+{ //interface
   
   // Variables
   private char[9][9] caaGrid ;
@@ -13,4 +13,4 @@ public interface Board
   public  void       endGame()           ;
   public  void       setCoord(int ia[2]) ;
   
-} //Interface
+} //interface
