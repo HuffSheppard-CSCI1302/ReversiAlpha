@@ -1,2 +1,3 @@
 #!/bin/env sh
-## Will contain commands that automatically compile the source to bytecode.  
+mkdir build && cd build
+jar -cf Reversi.jar ../src/*
