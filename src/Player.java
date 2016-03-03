@@ -1,16 +1,17 @@
+import java.util.Random;
 import java.util.Scanner;
 
 abstract class Player {
 	Scanner keyboard = new Scanner(System.in);
  		abstract int[] getInput(char cPiece);
- 		private boolean isValid(int[] ia){
- 			char[][] validGrid=Reversi.getGrid();
+ 		public boolean isValid(int[] ia){
+ 			char[][] validGrid=new char [9][9];//Reversi.getGrid();
  			int x=ia[0],y=ia[1];
  			if (validGrid[x][y]=='_') return true;
  			else return false;
  		}
 
- class HumanPlayer extends Player{
+ class HumanPlayer extends Player{//good
 	 int[] getInput(char cPiece){
 				int[] input = new int[2];
 				while (true){
@@ -29,27 +30,74 @@ abstract class Player {
 				}	
 	 }
  
- class RandomComputerPlayer extends Player{
-	 int[] getInput(char cPiece){
-		 int [] compGuess=new int[2];
-		 int[] temp=new int[2];
-		 	for (int x=0; x<9;x++){
+ 
+ abstract class ComputerPlayer extends Player{//good
+	 public int[][] possibleGuesses(){//returns a 2d array of possible guess cordinates
+		 int count=0; int [] temp=new int[2];
+		 	for (int x=0; x<9;x++){ //this just finds how many possible guess locations there are
 		 		for(int y=0; y<9;y++){
 		 			temp[0]=x;temp[1]=y;
-		 			if (isValid(temp)==true) compGuess=temp; 
+		 			if (isValid(temp)==true) count++; 
 		 		} //y for
 		 }//x for
-		 	return compGuess;
-	 }//end of getinput
+		int[][] possibleGuessLoc=new int[count][2];
+		count=0;
+		for (int x=0; x<9;x++){//this loop places all possible coordinates in the array
+	 		for(int y=0; y<9;y++){
+	 			temp[0]=x;temp[1]=y;
+	 			if (isValid(temp)==true){
+	 				possibleGuessLoc[count][0]=x;
+	 				possibleGuessLoc[count][1]=y;
+	 				count++;
+	 			}//end if 
+	 		} //y for
+		}//x for
+	return possibleGuessLoc; 	 	
+	 }//end possible guesses
+	}
+	
+	 
+ 
+ class RandomComputerPlayer extends ComputerPlayer{//good
+	int[] getInput (char cPiece){
+		int[][] guessLoc= possibleGuesses();
+		int [] compGuess=new int[2];
+		Random rand=new Random();
+		int randNum=rand.nextInt(guessLoc.length);
+		compGuess[0]=guessLoc[randNum][0];
+		compGuess[1]=guessLoc[randNum][1];
+		return compGuess;
+		}	
  }//end of randomcompplayer
 
- 
+ class InteligentComputerPlayer extends ComputerPlayer{//need to update some of the methods (getGrid() and update() to whatever Miles is making them to be
+	 int [] getInput (char cPiece){
+		 int [][] possibleGuess=possibleGuesses();
+		 int [][] tempGridGuess=Reversi.getGrid();
+		 int [][] tempGridCheck=Reversi.getGrid();
+		 int [] compGuess=new int[2];//has the guess that results in highest number of pieces in total
+		 int [] compCheck=new int[2];//this is checked agains the compGuess to see if this will result in a higher total of pieces
+		 compGuess[0]=possibleGuess[0][0];
+		 compGuess[1]=possibleGuess[0][1];
+		 for (int i=0; i<possibleGuess.length; i++){//this goes through the possible guess array and changes the compCheck to new coordinates
+				 compCheck[0]=possibleGuess[i][0];
+				 compCheck[1]=possibleGuess[i][1];
+				 Reversi.update(tempGridGuess, compGuess, cPiece);
+				 Reversi.update(tempGridCheck, compCheck, cPiece);
+				 if (Reversi.score(tempGridCheck, cPiece)>Reversi.score(tempGridGuess, cPiece)){
+					 compGuess[0]=compCheck[0];
+					 compGuess[1]=compGuess[1]; 
+				 }	
+		 }	 
+		return compGuess; 
+	 }  
+ }
+
+
+ }
 
 
 
-
-
-}
 
 
 	
