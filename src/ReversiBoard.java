@@ -1,6 +1,6 @@
 public class ReversiBoard implements Board
 { //class
-	private char[9][9] caaGrid;
+	private char[][] caaGrid;
 	/* KEY:	
 	 * '.' = empty
 	 * 'X' = Dark (player 1)
