@@ -35,7 +35,7 @@ public class Reversi
 		String[] sa = cleanArgs(saArgs);
 		
 		// Create players
-		for(int i = 0; i < sa.length; i++)
+		for(int i = 0; i < 2; i++)
 		{ //loop
 			switch(sa[i])
 			{ //switch
@@ -97,16 +97,6 @@ public class Reversi
 			else          bDarkTurn = true ;
 		} //loop
     	} //method
-
-	////////////////////////////////////////////////////////////////////////////
-	/** Validate and simplify input to just 2 args.  
-	 * @author Preston Sheppard
-	 * @param  saArgs  Arguments passed into the program from the commandline.  
-	**/
-	private String[2] cleanArgs(String[] saArgs)
-	{ //method
-		//TODO
-	} //method
 
 	////////////////////////////////////////////////////////////////////////////
 	/** Ends the game.  
