@@ -28,8 +28,8 @@ public class Reversi
 	public static void main(String[] saArgs)
 	{ //method
 		// Variables
-		boolean bDarkTurn      = true ;  // Dark goes first
-		boolean bOtherCantMove = false;
+		boolean bDarkTurn     = true ;  // Dark goes first
+		boolean bOtherCanMove = false;
 
 		// Check saArgs
 		String[] sa = cleanArgs(saArgs);
@@ -72,7 +72,7 @@ public class Reversi
 			if(oGrid.canMove())
 			{ //3+
 				// Other player might be able to go next turn
-				bOtherCantMove = false;
+				bOtherCanMove = true;
 
 				// Get player-input and change the grid with it
 				if(bDarkTurn)
@@ -87,7 +87,7 @@ public class Reversi
 			// If there are no moves left...  
 			} else { //3=
 				// If the other player could still move last turn...  
-				if(!bOtherCantMove) bOtherCantMove = true;
+				if(bOtherCanMove) bOtherCanMove = false;
 				// If neither player can move, the game is over.  
 				else oGrid.endGame(oGrid.getScore());
 			} //3-
