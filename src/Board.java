@@ -2,14 +2,14 @@ public interface Board
 { //interface
   
   // Variables
-  private char[9][9] caaGrid;
+  private char[][] caaGrid;
   
   // Methods
-  public  boolean    canMove()  ;
-  public  char[9][9] getGrid()  ;
-  public  int[2]     getScore() ;
-  public  void       calcMoves();
-  public  void       setCoord(char cPiece, int[2] iaCoord);
-  public  void       setCoord(char[9][9] caaGrid)         ;
+  public  boolean  canMove()  ;
+  public  char[][] getGrid()  ;
+  public  int[]    getScore() ;
+  public  void     calcMoves();
+  public  void     setCoord(char cPiece, int[] iaCoord);
+  public  void     setCoord(char[][] caaGrid);
   
 } //interface
