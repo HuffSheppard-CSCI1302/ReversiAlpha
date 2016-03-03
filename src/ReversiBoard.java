@@ -99,7 +99,7 @@ public class ReversiBoard implements Board
 	 * @return an array containing Dark and Light's scores, respectively.  
 	**/
 	@Override
-	public int[2] getScore()
+	public int[] getScore()
 	{ //method
 		//TODO
 	} //method
@@ -153,7 +153,7 @@ public class ReversiBoard implements Board
 	 * @param	iaCoord The coordinates of the space to fill
 	**/
 	@Override
-	public void setCoord(char cPiece, int iaCoord[2])
+	public void setCoord(char cPiece, int iaCoord[])
 	{ //method
 		caaGrid[iaCoord[0]][iaCoord[1]] = cPiece;
 	} //method
