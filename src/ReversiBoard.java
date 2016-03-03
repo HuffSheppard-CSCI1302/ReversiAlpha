@@ -1,7 +1,7 @@
 public class ReversiBoard implements Board
 { //class
 	private char[][] caaGrid;
-	/* KEY:	
+	/* KEY: 
 	 * '.' = empty
 	 * 'X' = Dark (player 1)
 	 * 'O' = Light (player 2)
@@ -38,7 +38,7 @@ public class ReversiBoard implements Board
 	
 	////////////////////////////////////////////////////////////////////////////
 	/** Constructor-method.  Fills the grid with the parameter.  
-	 *  Warning:  Validation is *not* perfomed on this parameter!  
+	 *  Warning:  Validation is *not* perfomed on this parameter!	
 	 * @author Miles B Huff
 	 * @param caaGrid The grid you'd like to generate a ReversiBoard from.  
 	**/
@@ -149,8 +149,8 @@ public class ReversiBoard implements Board
 	////////////////////////////////////////////////////////////////////////////
 	/** Sets a single space in the grid with the specified <code>char</code>.  
 	 * @author Miles B Huff
-	 * @param	cPiece  The <code>char</code> with which to fill the space
-	 * @param	iaCoord The coordinates of the space to fill
+	 * @param cPiece	The <code>char</code> with which to fill the space
+	 * @param iaCoord The coordinates of the space to fill
 	**/
 	@Override
 	public void setCoord(char cPiece, int iaCoord[])
