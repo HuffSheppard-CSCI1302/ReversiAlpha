@@ -20,8 +20,6 @@
 
 public class Reversi
 { //class
-	private static boolean bDarkTurn  = true;  // Dark goes first
-	
 	////////////////////////////////////////////////////////////////////////////
 	/** The main method.  
 	 * @author Miles B Huff
@@ -29,6 +27,10 @@ public class Reversi
 	**/
 	public static void main(String[] saArgs)
 	{ //method
+		// Variables
+		boolean bDarkTurn      = true ;  // Dark goes first
+		boolean bOtherCantMove = false;
+
 		// Check saArgs
 		String[] sa = cleanArgs(saArgs);
 		
@@ -62,21 +64,32 @@ public class Reversi
 		// Core game-loop
 		while(true)
 		{ //loop
-			// Figure out if there are any moves left.  If not, the game is over.  
+			// Refresh and print the gameboard
 			oGrid.calcMoves();
-			if(!oGrid.canMove()) oGrid.endGame(oGrid.getScore());
-
-			// Refresh the gameboard
 			System.out.println(oGrid.toString());
 
-			// Get player-input and change the grid with it
-			if(bDarkTurn)
-			{ //3+
-				System.out.println("Enter your move, X player:  ");
-				grid.update(oDark.getInput('X', oGrid.getGrid()));
+			// If there are moves left...  
+			if(oGrid.canMove())
+				{ //3+
+				// Other player might be able to go next turn
+				bOtherCantMove = false;
+
+				// Get player-input and change the grid with it
+				if(bDarkTurn)
+				{ //4+
+					System.out.println("Enter your move, X player:  ");
+					grid.update(oDark.getInput('X', oGrid.getGrid()));
+				} else { //4=
+					System.out.println("Enter your move, O player:  ");
+					grid.update(oLight.getInput('O', oGrid.getGrid()));
+				} //4-
+
+			// If there are no moves left...  
 			} else { //3=
-				System.out.println("Enter your move, O player:  ");
-				grid.update(oLight.getInput('O', oGrid.getGrid()));
+				// If the other player could still move last turn...  
+				if(!bOtherCantMove) bOtherCantMove = true;
+				// If neither player can move, the game is over.  
+				else oGrid.endGame(oGrid.getScore());
 			} //3-
 			
 			// Change whose turn it is
