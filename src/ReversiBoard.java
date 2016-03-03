@@ -42,7 +42,7 @@ public class ReversiBoard implements Board
 	 * @author Miles B Huff
 	 * @param caaGrid The grid you'd like to generate a ReversiBoard from.  
 	**/
-	public ReversiBoard(char[9][9] caaGrid)
+	public ReversiBoard(char[][] caaGrid)
 	{ //method
 		for(int i = 0; i < 9; i++)
 		{ //loop
@@ -80,7 +80,7 @@ public class ReversiBoard implements Board
 	 * @return a deep copy of <code>caaGrid</code>
 	**/
 	@Override
-	public char[9][9] getGrid()
+	public char[][] getGrid()
 	{ //method
 		char[][] caaGrid = new char[9][9];
 		for(int i = 0; i < 9; i++)
