@@ -101,7 +101,20 @@ public class ReversiBoard implements Board
 	@Override
 	public int[] getScore()
 	{ //method
-		//TODO
+		int[] iaScore = new int[2];
+		for(int i = 0; i < 2; i++)
+		{ //loop
+			iaScore[i] = 0;
+		} //loop
+		for(int i = 0; i < 9; i++)
+		{ //loop
+			for(int j = 0; j < 9; j++)
+			{ //loop
+				if(caaGrid[i][j] == 'X') iaScore[0]++;
+				if(caaGrid[i][j] == 'O') iaScore[1]++;
+			} //loop
+		} //loop
+		return iaScore;
 	} //method
 	
 	////////////////////////////////////////////////////////////////////////////
