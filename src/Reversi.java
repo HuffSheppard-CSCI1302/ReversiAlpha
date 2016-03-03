@@ -70,7 +70,7 @@ public class Reversi
 
 			// If there are moves left...  
 			if(oGrid.canMove())
-				{ //3+
+			{ //3+
 				// Other player might be able to go next turn
 				bOtherCantMove = false;
 
