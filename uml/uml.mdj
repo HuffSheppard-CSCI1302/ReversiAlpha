@@ -709,7 +709,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+getScore(): int[]",
+											"text": "+getScore(cPiece): int",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5
 										},
@@ -1250,7 +1250,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+getScore(): int[]",
+											"text": "+getScore(char cPiece): int",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5
 										},
@@ -4043,11 +4043,27 @@
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
-									"type": "int[]",
+									"type": "int",
 									"isReadOnly": false,
 									"isOrdered": false,
 									"isUnique": false,
 									"direction": "return"
+								},
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAFTPveGIYks01A=",
+									"_parent": {
+										"$ref": "AAAAAAFTORG1o4NneF4="
+									},
+									"name": "cPiece",
+									"visibility": "public",
+									"isStatic": false,
+									"isLeaf": false,
+									"type": "",
+									"isReadOnly": false,
+									"isOrdered": false,
+									"isUnique": false,
+									"direction": "in"
 								}
 							],
 							"concurrency": "sequential",
@@ -4388,11 +4404,27 @@
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
-									"type": "int[]",
+									"type": "int",
 									"isReadOnly": false,
 									"isOrdered": false,
 									"isUnique": false,
 									"direction": "return"
+								},
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAFTPvdJ8Ykp5lw=",
+									"_parent": {
+										"$ref": "AAAAAAFTORIkBIN6L/c="
+									},
+									"name": "char cPiece",
+									"visibility": "public",
+									"isStatic": false,
+									"isLeaf": false,
+									"type": "",
+									"isReadOnly": false,
+									"isOrdered": false,
+									"isUnique": false,
+									"direction": "in"
 								}
 							],
 							"concurrency": "sequential",
