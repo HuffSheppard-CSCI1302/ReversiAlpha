@@ -17,10 +17,12 @@ import java.util.Scanner;
  		  * @param ia The coordinates of the space to check
  		 * @author Preston Sheppard
  		**/
- 		public boolean isValid(int[] ia){
- 			char[][] validGrid=new char [9][9];//Reversi.getGrid();
+ 		public boolean isValid(int[] ia, char[][] caArray){
+ 			ReversiBoard validGrid=new ReversiBoard(caArray);
+ 			
+ 			
  			int x=ia[0],y=ia[1];
- 			if (validGrid[x][y]=='_') return true;
+ 			if (validGrid.getGrid()[x][y]=='_') return true;
  			else return false;
  		}
  		
@@ -49,7 +51,7 @@ import java.util.Scanner;
 						input[1]=intTemp%10;
 						intTemp=(int) intTemp/10;
 						input[0]=intTemp;
-						if (isValid(input)==true) return input;
+						if (isValid(input, caArray)==true) return input;
 						else System.out.println("Please enter a valid input!");
 							}//end the else statement
 						}//ends the while true loop
@@ -73,12 +75,15 @@ import java.util.Scanner;
 		 /** a method that scans the grid for possible moves and stores all possible moves into an array to be called on later
 		 * @author Preston Sheppard
 		**/
-		 public int[][] possibleGuesses(){//returns a 2d array of possible guess cordinates
+		 public int[][] possibleGuesses(char[][] caArray){//returns a 2d array of possible guess cordinates
 			 int count=0; int [] temp=new int[2];
 			 	for (int x=0; x<9;x++){ //this just finds how many possible guess locations there are
 			 		for(int y=0; y<9;y++){
 			 			temp[0]=x;temp[1]=y;
-			 			if (isValid(temp)==true) count++; 
+			 			if (isValid(temp, caArray)==true) count++; 
+			 		
+			 			
+			 			
 			 		} //y for
 			 }//x for
 			int[][] possibleGuessLoc=new int[count][2];
@@ -86,9 +91,11 @@ import java.util.Scanner;
 			for (int x=0; x<9;x++){//this loop places all possible coordinates in the array
 		 		for(int y=0; y<9;y++){
 		 			temp[0]=x;temp[1]=y;
-		 			if (isValid(temp)==true){
+		 			if (isValid(temp, caArray)==true){
 		 				possibleGuessLoc[count][0]=x;
 		 				possibleGuessLoc[count][1]=y;
+		 				
+		 				
 		 				count++;
 		 			}//end if 
 		 		} //y for
@@ -112,10 +119,11 @@ import java.util.Scanner;
 			**/
 				int[] getInput (char cPiece, char[][] caArray){
 					pause();
-					int[][] guessLoc= possibleGuesses();
+					int[][] guessLoc= possibleGuesses(caArray);
 					int [] compGuess=new int[2];
 					Random rand=new Random();
-					int randNum=rand.nextInt(guessLoc.length);
+					
+					int randNum = rand.nextInt(guessLoc.length);
 					compGuess[0]=guessLoc[randNum][0];
 					compGuess[1]=guessLoc[randNum][1];
 					return compGuess;
@@ -137,7 +145,7 @@ import java.util.Scanner;
 			**/
 			 int [] getInput (char cPiece, char[][] caaGrid){
 				 pause();
-				 int [][] possibleGuess=possibleGuesses();
+				 int [][] possibleGuess=possibleGuesses(caaGrid);
 				 int poop=2;
 				 if (cPiece=='X') poop=0;
 				 if (cPiece=='O') poop=1;
