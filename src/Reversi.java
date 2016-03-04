@@ -31,22 +31,26 @@ public class Reversi
 		boolean bOtherCanMove = false;
 		char    cPiece        = 'X'  ;  // Dark goes first
 		
+		Player oDark=new RandomComputerPlayer();
+		Player oLight=new HumanPlayer();
+		
+		
 		// Create players
 		for(int i = 0; i < 2; i++)
 		{ //loop
 			switch(saArgs[i])
 			{ //switch
 				case "Human":
-					if(i == 0) Player oDark  = new Player.HumanPlayer(); 
-					else       Player oLight = new Player.HumanPlayer();
+					if(i == 0) oDark  = new HumanPlayer(); 
+					else       oLight = new HumanPlayer();
 					break;
 				case "RandomComputerPlayer":
-					if(i == 0) Player oDark  = new Player.ComputerPlayer.RandomComputerPlayer();
-					else       Player oLight = new Player.ComputerPlayer.RandomComputerPlayer();
+					if(i == 0) oDark  = new RandomComputerPlayer();
+					else       oLight = new RandomComputerPlayer();
 					break;
 				case "IntelligentComputerPlayer":
-					if(i == 0) Player oDark  = new Player.ComputerPlayer.IntelligentComputerPlayer();
-					else       Player oLight = new Player.ComputerPlayer.IntelligentComputerPlayer();
+					if(i == 0) oDark  = new IntelligentComputerPlayer();
+					else       oLight = new IntelligentComputerPlayer();
 					break;
 				default:
 					System.out.println("Usage:  \n$ java Reversi [Human|RandomComputerPlayer|IntelligentComputerPlayer] [Human|RandomComputerPlayer|IntelligentComputerPlayer]");
@@ -75,10 +79,10 @@ public class Reversi
 				if(cPiece == 'X')
 				{ //4+
 					System.out.println("Enter your move, X player:  ");
-					oGrid.update(oDark.getInput('X', oGrid.getGrid()));
+					oGrid.setCoord('X', oDark.getInput('X', oGrid.getGrid()));
 				} else { //4=
 					System.out.println("Enter your move, O player:  ");
-					oGrid.update(oLight.getInput('O', oGrid.getGrid()));
+					oGrid.setCoord('O', oLight.getInput('O', oGrid.getGrid()));
 				} //4-
 
 			// If there are no moves left...  
