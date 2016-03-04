@@ -35,15 +35,15 @@ public class ReversiBoard implements Board
 	public ReversiBoard()
 	{ //method
 		// x-axis
-		for(int i = 1; i < 9; i++)
+		for(int i = 0; i < 9; i++)
 		{ //loop
-			caaGrid[0][i] = (char)i;
+			caaGrid[0][i] = Integer.toString(i).charAt(0);
 		} //loop
 
 		// y-axis
-		for(int i = 1; i < 9; i++)
+		for(int i = 0; i < 9; i++)
 		{ //loop
-			caaGrid[i][0] = (char)i;
+			caaGrid[i][0] = Integer.toString(i).charAt(0);;
 		} //loop
 
 		// center
@@ -159,7 +159,7 @@ public class ReversiBoard implements Board
 			} //loop
 		s+= '\n';
 		} //loop
-		return s + '\n';
+		return s;
 	} //method
 	
 	////////////////////////////////////////////////////////////////////////////
