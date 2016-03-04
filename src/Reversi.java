@@ -1,7 +1,7 @@
 /** This class represents a game of Reversi.
  * @author Miles B Huff <a href="mailto:MilesBHuff@UGA.edu"><nohtml><</nohtml>email<nohtml>></nohtml></a>, 
  *         Preston Sheppard
- * @date   2016-02-29
+ * @date   2016-03-03
  * @disclaimer
  *  The following code represents our own work.  We have neither received nor 
  *  given inappropriate assistance.  We have not copied or modified code from 
