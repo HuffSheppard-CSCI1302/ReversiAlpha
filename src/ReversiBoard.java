@@ -53,6 +53,13 @@ public class ReversiBoard implements Board
 				caaGrid[i][j] = '.';
 			} //loop
 		} //loop
+		
+		// Place starting-pieces
+		caaGrid[4][4] = 'X';
+		caaGrid[4][5] = 'O';
+		caaGrid[5][4] = 'O';
+		caaGrid[5][5] = 'X';
+		
 	} //method
 	
 	////////////////////////////////////////////////////////////////////////////
@@ -158,7 +165,7 @@ public class ReversiBoard implements Board
 	/** Finds all possible moves.  
 	 * @author Miles B Huff
 	**/
-	public void calcMoves()
+	public void calcMoves(char cPiece)
 	{ //method
 		// Wipe '_'
 		for(int i = 1; i < 9; i++)
@@ -181,21 +188,18 @@ public class ReversiBoard implements Board
 	**/
 	public void setCoord(char cPiece, int[] iaCoord)
 	{ //method
+		// Set specified square
+		caaGrid[iaCoord[0]][iaCoord[1]] = cPiece;
+		
+		// If we're setting the square to a player's colour...
 		if((cPiece == 'X')
 		|| (cPiece == 'O'))
 		{ //if
-			caaGrid[iaCoord[0]][iaCoord[1]] = cPiece;
-			for(int i = (iaCoord[0] - 1); i < (iaCoord[0] + 1); i++)
+			// Find flipping-ranges and flips their contents
+			for(int i = 0; i < 8; i++)
 			{ //loop
-				for(int j = (iaCoord[1] - 1); i < (iaCoord[1] + 1); j++)
-				{ //loop
-					if((cPiece == 'X') && (caaGrid[i][j] == 'O')
-					|| (cPiece == 'O') && (caaGrid[i][j] == 'X')
-					  ) caaGrid[i][j] = cPiece;
-				} //loop
+				
 			} //loop
-		} else {
-			caaGrid[iaCoord[0]][iaCoord[1]] = cPiece;
 		} //if
 	} //method
 	
