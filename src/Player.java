@@ -12,6 +12,7 @@ public abstract class Player {
  		}
 
  public class HumanPlayer extends Player{//good
+	 public HumanPlayer(){}
 	 int[] getInput(char cPiece, char[][] caArray){
 				int[] input = new int[2];
 				while (true){
@@ -66,7 +67,7 @@ public abstract class Player {
 	
 	
 	 public class RandomComputerPlayer extends ComputerPlayer{
-		 
+		 public RandomComputerPlayer(){}
 			int[] getInput (char cPiece, char[][] caArray){
 				pause();
 				int[][] guessLoc= possibleGuesses();
@@ -83,6 +84,7 @@ public abstract class Player {
 
 public	 class InteligentComputerPlayer extends ComputerPlayer
 	 {
+	public InteligentComputerPlayer(){}
 		 
 		 int [] getInput (char cPiece, char[][] caaGrid){
 			 pause();
@@ -127,13 +129,3 @@ public	 class InteligentComputerPlayer extends ComputerPlayer
 
 
  }
-
-
-
-
-
-	
-	
-	
-	
-
