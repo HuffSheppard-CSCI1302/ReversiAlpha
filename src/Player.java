@@ -1,7 +1,7 @@
 import java.util.Random;
 import java.util.Scanner;
 
-abstract class Player {
+public abstract class Player {
 	Scanner keyboard = new Scanner(System.in);
  		abstract int[] getInput(char cPiece, char[][] caArray);
  		public boolean isValid(int[] ia){
@@ -11,7 +11,7 @@ abstract class Player {
  			else return false;
  		}
 
- class HumanPlayer extends Player{//good
+ public class HumanPlayer extends Player{//good
 	 int[] getInput(char cPiece, char[][] caArray){
 				int[] input = new int[2];
 				while (true){
@@ -31,7 +31,7 @@ abstract class Player {
 	 }
  
  
- abstract class ComputerPlayer extends Player{//good
+ public static abstract class ComputerPlayer extends Player{//good
 	 
 	 public void pause(){
 		 try {
@@ -65,7 +65,7 @@ abstract class Player {
 	 }//end possible guesses
 	
 	
-	 class RandomComputerPlayer extends ComputerPlayer{
+	 public class RandomComputerPlayer extends ComputerPlayer{
 		 
 			int[] getInput (char cPiece, char[][] caArray){
 				pause();
@@ -81,7 +81,7 @@ abstract class Player {
 	 
 	 
 
-	 class InteligentComputerPlayer extends ComputerPlayer
+	 public class InteligentComputerPlayer extends ComputerPlayer
 	 {
 		 
 		 int [] getInput (char cPiece, char[][] caaGrid){
