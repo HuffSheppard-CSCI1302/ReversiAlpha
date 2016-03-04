@@ -102,8 +102,8 @@ public class Reversi
 	**/
 	private void endGame(int[] iaScore)
 	{ //method
-		int xScore=SCORE SHIT;
-		int oScore=SCORE SHIT;
+		int xScore=iaScore[0];
+		int oScore=iaScore[1];
 		System.out.println("\n<GAME OVER>\n");
 		System.out.println("Player X Score:"+xScore+".");
 		System.out.print("Player O Score:"+oScore+".\n");
@@ -111,6 +111,5 @@ public class Reversi
 		else if (oScore==xScore) System.out.print("Both Players tied! No gloating for you today!");
 		else System.out.println("Congratulations Player X! You win!");
 		System.exit(0);
-	
 	} //method
 } //class
