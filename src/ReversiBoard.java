@@ -166,19 +166,49 @@ public class ReversiBoard implements Board
 	/** Finds all possible moves.  
 	 * @author Miles B Huff
 	**/
-	public void calcMoves(char cPiece)
-	{ //method
-		// Wipe '_'
-		for(int i = 1; i < 9; i++)
-		{ //loop
-			for(int j = 1; j < 9; j++)
-			{ //loop
-				if(caaGrid[i][j] == '_') caaGrid[i][j] = '.';
-			} //loop
-		} //loop
-
-		// Calculate '_'
-		//TODO
+	public void calcMoves(char cPiece){ //method
+		int tempX=0;
+		int tempY=0;
+		for(int x=0;x<9;x++){//horizontal scan to right
+			for (int y=0;y<9;y++){
+				if ((x!=0)&&(caaGrid[y][x]!=cPiece)&&(caaGrid[y][x]!='.')){
+					tempX=x-1; tempY=y;
+					//use [y][x] for the horizontal scan 
+				}
+				if ((tempY==y)&&(caaGrid[y][x]==cPiece)) caaGrid[tempX][tempY]='_';
+			}
+		}
+		
+		for(int x=0;x<9;x++){//verticle down scan
+			for (int y=0;y<9;y++){
+				if ((y!=0)&&(caaGrid[x][y]!=cPiece)&&(caaGrid[x][y]!='.')){
+					tempX=x; tempY=y-1;
+					//use [x][y] for the verticle down scan 
+				}
+				if ((tempX==x)&&(caaGrid[x][y]==cPiece)) caaGrid[tempY][tempX]='_';
+			}
+		}
+		
+		for(int x=9;x>0;x--){//horizontal left scan 
+			for (int y=0;y<9;y++){
+				if ((x!=9)&&(caaGrid[y][x]!=cPiece)&&(caaGrid[y][x]!='.')){
+					tempX=x+1; tempY=y;
+					//use [y][x] for the horizontal scan 
+				}
+				if ((tempY==y)&&(caaGrid[y][x]==cPiece)) caaGrid[tempX][tempY]='_';
+			}
+		}
+		
+		for(int x=0;x<9;x++){//verticle up scan
+			for (int y=9;y>0;y--){
+				if ((y!=9)&&(caaGrid[x][y]!=cPiece)&&(caaGrid[x][y]!='.')){
+					tempX=x; tempY=y+1;
+					//use [x][y] for the verticle down scan 
+				}
+				if ((tempX==x)&&(caaGrid[x][y]==cPiece)) caaGrid[tempY][tempX]='_';
+			}
+		}
+		
 	} //method
 	
 	////////////////////////////////////////////////////////////////////////////
