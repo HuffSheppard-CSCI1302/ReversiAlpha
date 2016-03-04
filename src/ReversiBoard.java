@@ -166,7 +166,7 @@ public class ReversiBoard implements Board
 	 * @param iaCoord The coordinates of the space to fill
 	**/
 	@Override
-	public void setCoord(char cPiece, int iaCoord[])
+	public void setCoord(char cPiece, int[] iaCoord)
 	{ //method
 		caaGrid[iaCoord[0]][iaCoord[1]] = cPiece;
 	} //method
