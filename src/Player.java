@@ -5,8 +5,6 @@ import java.util.Scanner;
  * @author Preston Sheppard
 **/
  abstract class Player {
-	
-	Scanner keyboard = new Scanner(System.in);
 	/** abstract method for getting input
 	  * @param cPiece	The <code>char</code> with which to fill the space
 	  * @param caArray The grid that the user is playing on
@@ -35,6 +33,8 @@ import java.util.Scanner;
 		 * @author Preston Sheppard
 		**/
 		 public HumanPlayer(){}
+			
+		Scanner keyboard = new Scanner(System.in);
 		 /** a method that overloads the abstract method of getting an input
 		  * @param cPiece	The <code>char</code> with which to fill the space
 		  * @param caArray The grid that the user is playing on
