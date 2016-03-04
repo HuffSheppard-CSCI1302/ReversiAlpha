@@ -1,5 +1,6 @@
 /** This class represents a Reversi game-board.  
- * @author Miles B Huff <a href="mailto:MilesBHuff@UGA.edu"><nohtml><</nohtml>email<nohtml>></nohtml></a>
+ * @author Miles B Huff <a href="mailto:MilesBHuff@UGA.edu"><nohtml><</nohtml>email<nohtml>></nohtml></a>, 
+ *         Preston Sheppard
  * @date   2016-03-03
  * @disclaimer
  *  The following code represents our own work.  We have neither received nor 
@@ -94,7 +95,8 @@ public class ReversiBoard implements Board
 	
 	////////////////////////////////////////////////////////////////////////////
 	/** Makes and returns a deep copy of <code>caaGrid</code>.  
-	 * @author Miles B Huff
+	 * @author Miles B Huff, 
+	 *         Preston Sheppard
 	 * @return a deep copy of <code>caaGrid</code>
 	**/
 	public char[][] getGrid()
