@@ -1,4 +1,4 @@
-/** This class represents a game of Reversi.
+/** This class represents a Reversi game-board.  
  * @author Miles B Huff <a href="mailto:MilesBHuff@UGA.edu"><nohtml><</nohtml>email<nohtml>></nohtml></a>, 
  *         Preston Sheppard
  * @date   2016-03-03
@@ -18,109 +18,645 @@
  * @see <a href="https://gist.github.com/mepcotterell/3564a8eaa32f49e3d460</a>
 **/
 
-public class Reversi
+public class ReversiBoard implements Board
 { //class
+	private char[][] caaGrid=new char[9][9];
+	/* KEY: 
+	 * '.' = empty
+	 * 'X' = Dark (player 1)
+	 * 'O' = Light (player 2)
+	 * '_' = Possible move
+	 */
+	
 	////////////////////////////////////////////////////////////////////////////
-	/** The main method.  
+	/** Constructor-method.  Fills the grid with axis-numbers and blanks.  
+	 * @author Miles B Huff
+	**/
+	public ReversiBoard()
+	{ //method
+		// x-axis
+		for(int i = 0; i < 9; i++)
+		{ //loop
+			caaGrid[0][i] = Integer.toString(i).charAt(0);
+		} //loop
+
+		// y-axis
+		for(int i = 0; i < 9; i++)
+		{ //loop
+			caaGrid[i][0] = Integer.toString(i).charAt(0);;
+		} //loop
+
+		// center
+		for(int i = 1; i < 9; i++)
+		{ //loop
+			for(int j = 1; j < 9; j++)
+			{ //loop
+				caaGrid[i][j] = '.';
+			} //loop
+		} //loop
+		
+		// Place starting-pieces
+		caaGrid[4][4] = 'X';
+		caaGrid[4][5] = 'O';
+		caaGrid[5][4] = 'O';
+		caaGrid[5][5] = 'X';
+	} //method
+	
+	////////////////////////////////////////////////////////////////////////////
+	/** Constructor-method.  Fills the grid with the parameter.  
+	 *  Warning:  Validation is *not* perfomed on this parameter!	
+	 * @author Miles B Huff
+	 * @param caaGrid The grid you'd like to generate a ReversiBoard from.  
+	**/
+	public ReversiBoard(char[][] caaGrid)
+	{ //method
+		setGrid(caaGrid);
+	} //method
+
+	////////////////////////////////////////////////////////////////////////////
+	/** Figures out if there are any moves left.  
+	 * @author Miles B Huff
+	 * @return <code>true</code> if there are moves left.  
+	**/
+	public boolean canMove()
+	{ //method
+		// Find '_'
+		for(int i = 1; i < 9; i++)
+		{ //loop
+			for(int j = 1; j < 9; j++)
+			{ //loop
+				// If a '_' is found, then there is a move left.  
+				if(caaGrid[i][j] == '_') return true;
+			} //loop
+		} //loop
+		// If no '_' found, then there are no moves left.  
+		return false;
+	} //method
+	
+	////////////////////////////////////////////////////////////////////////////
+	/** Makes and returns a deep copy of <code>caaGrid</code>.  
 	 * @author Miles B Huff, 
 	 *         Preston Sheppard
-	 * @param  saArgs Arguments passed into the program from the commandline.  
+	 * @return a deep copy of <code>caaGrid</code>
 	**/
-	public static void main(String[] saArgs)
+	public char[][] getGrid()
 	{ //method
-		// Variables
-		boolean bOtherCanMove = false;
-		char    cPiece = 'X';  // Dark goes first
-		Player  oDark  = new RandomComputerPlayer();
-		Player  oLight = new HumanPlayer();
-		
-		// Make sure they've entered enough arguments
-		if(saArgs.length < 2)
-		{ //if
-			System.out.println("Usage:  \n$ java Reversi [Human|RandomComputerPlayer|IntelligentComputerPlayer] [Human|RandomComputerPlayer|IntelligentComputerPlayer]");
-			System.exit(1);
-		} //if
-		
-		// Create players
-		for(int i = 0; i < 2; i++)
+		char[][] caaGrid = new char[9][9];
+		for(int i = 0; i < 9; i++)
 		{ //loop
-			switch(saArgs[i])
-			{ //switch
-				case "Human":
-					if(i == 0) oDark  = new HumanPlayer(); 
-					else       oLight = new HumanPlayer();
-					break;
-				case "RandomComputerPlayer":
-					if(i == 0) oDark  = new RandomComputerPlayer();
-					else       oLight = new RandomComputerPlayer();
-					break;
-				case "IntelligentComputerPlayer":
-					if(i == 0) oDark  = new IntelligentComputerPlayer();
-					else       oLight = new IntelligentComputerPlayer();
-					break;
-				default:
-					System.out.println("Usage:  \n$ java Reversi [Human|RandomComputerPlayer|IntelligentComputerPlayer] [Human|RandomComputerPlayer|IntelligentComputerPlayer]");
-					System.exit(1);
-					break;
-			} //switch
+			for(int j = 0; j < 9; j++)
+			{ //loop
+				caaGrid[i][j] = this.caaGrid[i][j];
+			} //loop
+		} //loop
+		return caaGrid;
+	} //method
+	
+	////////////////////////////////////////////////////////////////////////////
+	/** Calculates and returns the current score for both X and Y, as well as the number of blank spaces.  
+	 * @author Miles B Huff
+	 * @return an array containing Dark and Light's scores, respectively.  Also contains the number of blank spaces.  
+	**/
+	public int[] getScore()
+	{ //method
+		// Create scoreboard
+		int[] iaScore = new int[3];
+		for(int i = 0; i < 3; i++)
+		{ //loop
+			iaScore[i] = 0;
+		} //loop
+		
+		// Fill scoreboard
+		for(int i = 1; i < 9; i++)
+		{ //loop
+			for(int j = 1; j < 9; j++)
+			{ //loop
+				if(caaGrid[i][j] == 'X') iaScore[0]++;
+				if(caaGrid[i][j] == 'O') iaScore[1]++;
+				if(caaGrid[i][j] == '.') iaScore[2]++;
+				if(caaGrid[i][j] == '_') iaScore[2]++;
+			} //loop
+		} //loop
+		return iaScore;
+	} //method
+	
+	////////////////////////////////////////////////////////////////////////////
+	/** Converts <code>caaGrid</code> into a <code>String</code>.  
+	 * @author Miles B Huff
+	 * @return a <code>String</code>-representatino of <code>caaGrid</code>.  
+	**/
+	@Override
+	public String toString()
+	{ //method
+		String s = "\n";
+		for(int i = 0; i < 9; i++)
+		{ //loop
+			s+= ' ';
+			for(int j = 0; j < 9; j++)
+			{ //loop
+				s+= ' ';
+				s+= caaGrid[i][j];
+			} //loop
+		s+= '\n';
+		} //loop
+		return s;
+	} //method
+	
+	////////////////////////////////////////////////////////////////////////////
+	/** Finds all possible moves.  
+	 * @author Miles B Huff
+	 * @param  cPiece The piece to check moves for
+	**/
+	public void calcMoves(char cPiece)
+	{ //method
+		// Wipe '_'
+		for(int i = 1; i < 9; i++)
+		{ //loop
+			for(int j = 1; j < 9; j++)
+			{ //loop
+				if(caaGrid[i][j] == '_') caaGrid[i][j] = '.';
+			} //loop
 		} //loop
 
-		// Instantiate a new game
-		ReversiBoard oGrid = new ReversiBoard();
-		System.out.println("Welcome to Reversi!  Moves should be entered in \"[row] [column]\" format.  ");
-		
-		// Core game-loop
-		while(true)
+		int[] iaCoord = new int[2];
+
+		// Calculate '_'
+		for(int k = 1; k < 9; k++)
 		{ //loop
-			// Refresh and print the gameboard
-			oGrid.calcMoves(cPiece);
-			System.out.println(oGrid.toString());
+			for(int m = 1; m < 9; m++)
+			{ //loop
+				iaCoord[0] = k;
+				iaCoord[1] = m;
 
-			// If there are moves left...  
-			if(oGrid.canMove())
+				// LEFT-TO-RIGHT
+				try
+				{ //try
+					for(int i = 0; true; i++)
+					{ //loop
+						if(caaGrid[iaCoord[0]][iaCoord[1]] != cPiece) break;
+						if(cPiece == 'X')
+						{ //if
+							if(caaGrid[iaCoord[0]][iaCoord[1]] != cPiece) break;
+							if(caaGrid[iaCoord[0]+i][iaCoord[1]] == 'X')
+							{ //if
+								if(caaGrid[iaCoord[0]-1][iaCoord[1]] == '.') caaGrid[iaCoord[0]-1][iaCoord[1]] = '_';
+								break;
+							} //if
+							if(caaGrid[iaCoord[0]+i][iaCoord[1]] != 'O') break;
+						} else {
+							if(caaGrid[iaCoord[0]+i][iaCoord[1]] == 'O')
+							{ //if
+								if(caaGrid[iaCoord[0]-1][iaCoord[1]] == '.') caaGrid[iaCoord[0]-1][iaCoord[1]] = '_';
+								break;
+							} //if
+							if(caaGrid[iaCoord[0]+i][iaCoord[1]] != 'X') break;
+						} //if
+					} //loop
+				} catch(ArrayIndexOutOfBoundsException ex) {
+				} finally {
+				} //try
+				
+				// RIGHT-TO-LEFT
+				try
+				{ //try
+					for(int i = 0; true; i--)
+					{ //loop
+						if(cPiece == 'X')
+						{ //if
+							if(caaGrid[iaCoord[0]][iaCoord[1]] != cPiece) break;
+							if(caaGrid[iaCoord[0]+i][iaCoord[1]] == 'X')
+							{ //if
+								if(caaGrid[iaCoord[0]+1][iaCoord[1]] == '.') caaGrid[iaCoord[0]+1][iaCoord[1]] = '_';
+								break;
+							} //if
+							if(caaGrid[iaCoord[0]+i][iaCoord[1]] != 'O') break;
+						} else {
+							if(caaGrid[iaCoord[0]+i][iaCoord[1]] == 'O')
+							{ //if
+								if(caaGrid[iaCoord[0]+1][iaCoord[1]] == '.') caaGrid[iaCoord[0]+1][iaCoord[1]] = '_';
+								break;
+							} //if
+							if(caaGrid[iaCoord[0]+i][iaCoord[1]] != 'X') break;
+						} //if
+					} //loop
+				} catch(ArrayIndexOutOfBoundsException ex) {
+				} finally {
+				} //try
+				
+				// TOP-TO-BOTTOM
+				try
+				{ //try
+					for(int j = 0; true; j--)
+					{ //loop
+						if(cPiece == 'X')
+						{ //if
+							if(caaGrid[iaCoord[0]][iaCoord[1]] != cPiece) break;
+							if(caaGrid[iaCoord[0]][iaCoord[1]+j] == 'X')
+							{ //if
+								if(caaGrid[iaCoord[0]][iaCoord[1]+1] == '.') caaGrid[iaCoord[0]][iaCoord[1]+1] = '_';
+								break;
+							} //if
+							if(caaGrid[iaCoord[0]][iaCoord[1]+j] != 'O') break;
+						} else {
+							if(caaGrid[iaCoord[0]][iaCoord[1]+j] == 'O')
+							{ //if
+								if(caaGrid[iaCoord[0]][iaCoord[1]+1] == '.') caaGrid[iaCoord[0]][iaCoord[1]+1] = '_';
+								break;
+							} //if
+							if(caaGrid[iaCoord[0]][iaCoord[1]+j] != 'X') break;
+						} //if
+					} //loop
+				} catch(ArrayIndexOutOfBoundsException ex) {
+				} finally {
+				} //try
+				
+				// BOTTOM-TO-TOP
+				try
+				{ //try
+					for(int j = 0; true; j++)
+					{ //loop
+						if(cPiece == 'X')
+						{ //if
+							if(caaGrid[iaCoord[0]][iaCoord[1]] != cPiece) break;
+							if(caaGrid[iaCoord[0]][iaCoord[1]+j] == 'X')
+							{ //if
+								if(caaGrid[iaCoord[0]][iaCoord[1]-1] == '.') caaGrid[iaCoord[0]][iaCoord[1]-1] = '_';
+								break;
+							} //if
+							if(caaGrid[iaCoord[0]][iaCoord[1]+j] != 'O') break;
+						} else {
+							if(caaGrid[iaCoord[0]][iaCoord[1]+j] == 'O')
+							{ //if
+								if(caaGrid[iaCoord[0]][iaCoord[1]-1] == '.') caaGrid[iaCoord[0]][iaCoord[1]-1] = '_';
+								break;
+							} //if
+							if(caaGrid[iaCoord[0]][iaCoord[1]+j] != 'X') break;
+						} //if
+					} //loop
+				} catch(ArrayIndexOutOfBoundsException ex) {
+				} finally {
+				} //try
+				
+				// TL-TO-BR
+				try
+				{ //try
+					for(int i = 0, j = 0; true; i++, j--)
+					{ //loop
+						if(cPiece == 'X')
+						{ //if
+							if(caaGrid[iaCoord[0]][iaCoord[1]] != cPiece) break;
+							if(caaGrid[iaCoord[0]+i][iaCoord[1]+j] == 'X')
+							{ //if
+								if(caaGrid[iaCoord[0]-1][iaCoord[1]+1] == '.') caaGrid[iaCoord[0]-1][iaCoord[1]+1] = '_';
+								break;
+							} //if
+							if(caaGrid[iaCoord[0]+i][iaCoord[1]+j] != 'O') break;
+						} else {
+							if(caaGrid[iaCoord[0]+i][iaCoord[1]+j] == 'O')
+							{ //if
+								if(caaGrid[iaCoord[0]-1][iaCoord[1]+1] == '.') caaGrid[iaCoord[0]-1][iaCoord[1]+1] = '_';
+								break;
+							} //if
+							if(caaGrid[iaCoord[0]+i][iaCoord[1]+j] != 'X') break;
+						} //if
+					} //loop
+				} catch(ArrayIndexOutOfBoundsException ex) {
+				} finally {
+				} //try
+				
+				// BR-TO-TL
+				try
+				{ //try
+					for(int i = 0, j = 0; true; i--, j++)
+					{ //loop
+						if(cPiece == 'X')
+						{ //if
+							if(caaGrid[iaCoord[0]][iaCoord[1]] != cPiece) break;
+							if(caaGrid[iaCoord[0]+i][iaCoord[1]+j] == 'X')
+							{ //if
+								if(caaGrid[iaCoord[0]+1][iaCoord[1]-1] == '.') caaGrid[iaCoord[0]+1][iaCoord[1]-1] = '_';
+								break;
+							} //if
+							if(caaGrid[iaCoord[0]+i][iaCoord[1]+j] != 'O') break;
+						} else {
+							if(caaGrid[iaCoord[0]+i][iaCoord[1]+j] == 'O')
+							{ //if
+								if(caaGrid[iaCoord[0]+1][iaCoord[1]-1] == '.') caaGrid[iaCoord[0]+1][iaCoord[1]-1] = '_';
+								break;
+							} //if
+							if(caaGrid[iaCoord[0]+i][iaCoord[1]+j] != 'X') break;
+						} //if
+					} //loop
+				} catch(ArrayIndexOutOfBoundsException ex) {
+				} finally {
+				} //try
+				
+				// TR-TO-BL
+				try
+				{ //try
+					for(int i = 0, j = 0; true; i--, j--)
+					{ //loop
+						if(cPiece == 'X')
+						{ //if
+							if(caaGrid[iaCoord[0]][iaCoord[1]] != cPiece) break;
+							if(caaGrid[iaCoord[0]+i][iaCoord[1]+j] == 'X')
+							{ //if
+								if(caaGrid[iaCoord[0]+1][iaCoord[1]+1] == '.') caaGrid[iaCoord[0]+1][iaCoord[1]+1] = '_';
+								break;
+							} //if
+							if(caaGrid[iaCoord[0]+i][iaCoord[1]+j] != 'O') break;
+						} else {
+							if(caaGrid[iaCoord[0]+i][iaCoord[1]+j] == 'O')
+							{ //if
+								if(caaGrid[iaCoord[0]+1][iaCoord[1]+1] == '.') caaGrid[iaCoord[0]+1][iaCoord[1]+1] = '_';
+								break;
+							} //if
+							if(caaGrid[iaCoord[0]+i][iaCoord[1]+j] != 'X') break;
+						} //if
+					} //loop
+				} catch(ArrayIndexOutOfBoundsException ex) {
+				} finally {
+				} //try
+				
+				// BL-TO-TR
+				try
+				{ //try
+					for(int i = 0, j = 0; true; i++, j++)
+					{ //loop
+						if(cPiece == 'X')
+						{ //if
+							if(caaGrid[iaCoord[0]][iaCoord[1]] != cPiece) break;
+							if(caaGrid[iaCoord[0]+i][iaCoord[1]+j] == 'X')
+							{ //if
+								if(caaGrid[iaCoord[0]-1][iaCoord[1]-1] == '.') caaGrid[iaCoord[0]-1][iaCoord[1]-1] = '_';
+								break;
+							} //if
+							if(caaGrid[iaCoord[0]+i][iaCoord[1]+j] != 'O') break;
+						} else {
+							if(caaGrid[iaCoord[0]+i][iaCoord[1]+j] == 'O')
+							{ //if
+								if(caaGrid[iaCoord[0]-1][iaCoord[1]-1] == '.') caaGrid[iaCoord[0]-1][iaCoord[1]-1] = '_';
+								break;
+							} //if
+							if(caaGrid[iaCoord[0]+i][iaCoord[1]+j] != 'X') break;
+						} //if
+					} //loop
+				} catch(ArrayIndexOutOfBoundsException ex) {
+				} finally {
+				} //try
+			} //loop
+		} //loop
+	} //method
+	
+	////////////////////////////////////////////////////////////////////////////
+	/** Sets a single space in the grid with the specified <code>char</code>.  
+	 *  If the character used to fill that space happens to be a player's piece, 
+	 *  then also flip things.  
+	 * @author Miles B Huff
+	 * @param cPiece  The <code>char</code> with which to fill the space
+	 * @param iaCoord The coordinates of the space to fill
+	**/
+	public void setCoord(char cPiece, int[] iaCoord)
+	{ //method
+		// Set specified square
+		caaGrid[iaCoord[0]][iaCoord[1]] = cPiece;
+		
+		// If we're setting the square to a player's colour...
+		if((cPiece == 'X')
+		|| (cPiece == 'O'))
+		{ //if
+			boolean bFoundPiece = false     ;
+			int[]   iaEnd       = new int[2];
+			
+			// Find flipping-ranges and flips their contents
+			// LEFT-TO-RIGHT
+			bFoundPiece = false;
+			try
+			{ //try
+				for(int i = 0; true; i++)
+				{ //loop
+					if(caaGrid[iaCoord[0]+i][iaCoord[1]] != cPiece)
+					{ //if
+						bFoundPiece = true;
+						iaEnd[0] = iaCoord[0]+i;
+						break;
+					} //if
+					if(cPiece == 'X')
+					{      if(caaGrid[iaCoord[0]+i][iaCoord[1]] != 'O') break;
+					} else if(caaGrid[iaCoord[0]+i][iaCoord[1]] != 'X') break;
+				} //loop
+			} catch(ArrayIndexOutOfBoundsException ex) {
+			} //try
+			if(bFoundPiece)
 			{ //if
-				// Other player might be able to go next turn
-				bOtherCanMove = true;
-
-				// Get player-input and change the grid with it
-				if(cPiece == 'X')
-				{ //if
-					System.out.println("Enter your move, X player:  ");
-					oGrid.setCoord('X', oDark.getInput('X', oGrid.getGrid()));
-				} else {
-					System.out.println("Enter your move, O player:  ");
-					oGrid.setCoord('O', oLight.getInput('O', oGrid.getGrid()));
-				} //if
-
-			// If there are no moves left...  
-			} else {
-				// If the other player could still move last turn...  
-				if(bOtherCanMove) bOtherCanMove = false;
-				// If neither player can move, the game is over.  
-				else endGame(oGrid.getScore());
+				for(int i = 1; i != iaEnd[0]; i++)
+				{ //loop
+					caaGrid[iaCoord[0]+i][iaCoord[1]] = cPiece;
+				} //loop
 			} //if
 			
-			// Change whose turn it is
-			if(cPiece == 'X') cPiece = 'O';
-			else              cPiece = 'X' ;
-		} //loop
-    	} //method
-
+			// RIGHT-TO-LEFT
+			bFoundPiece = false;
+			try
+			{ //try
+				for(int i = 0; true; i--)
+				{ //loop
+					if(caaGrid[iaCoord[0]+i][iaCoord[1]] != cPiece)
+					{ //if
+						bFoundPiece = true;
+						iaEnd[0] = iaCoord[0]+i;
+						break;
+					} //if
+					if(cPiece == 'X')
+					{      if(caaGrid[iaCoord[0]+i][iaCoord[1]] != 'O') break;
+					} else if(caaGrid[iaCoord[0]+i][iaCoord[1]] != 'X') break;
+				} //loop
+			} catch(ArrayIndexOutOfBoundsException ex) {
+			} //try
+			if(bFoundPiece)
+			{ //if
+				for(int i = 1; i != iaEnd[0]; i--)
+				{ //loop
+					caaGrid[iaCoord[0]+i][iaCoord[1]] = cPiece;
+				} //loop
+			} //if
+			
+			// TOP-TO-BOTTOM
+			bFoundPiece = false;
+			try
+			{ //try
+				for(int j = 0; true; j--)
+				{ //loop
+					if(caaGrid[iaCoord[0]][iaCoord[1]+j] != cPiece)
+					{ //if
+						bFoundPiece = true;
+						iaEnd[1] = iaCoord[0]+j;
+						break;
+					} //if
+					if(cPiece == 'X')
+					{      if(caaGrid[iaCoord[0]][iaCoord[1]+j] != 'O') break;
+					} else if(caaGrid[iaCoord[0]][iaCoord[1]+j] != 'X') break;
+				} //loop
+			} catch(ArrayIndexOutOfBoundsException ex) {
+			} //try
+			if(bFoundPiece)
+			{ //if
+				for(int j = 1; j != iaEnd[1]; j--)
+				{ //loop
+					caaGrid[iaCoord[0]][iaCoord[1]+j] = cPiece;
+				} //loop
+			} //if
+			
+			// BOTTOM-TO-TOP
+			bFoundPiece = false;
+			try
+			{ //try
+				for(int j = 0; true; j++)
+				{ //loop
+					if(caaGrid[iaCoord[0]][iaCoord[1]+j] != cPiece)
+					{ //if
+						bFoundPiece = true;
+						iaEnd[1] = iaCoord[0]+j;
+						break;
+					} //if
+					if(cPiece == 'X')
+					{      if(caaGrid[iaCoord[0]][iaCoord[1]+j] != 'O') break;
+					} else if(caaGrid[iaCoord[0]][iaCoord[1]+j] != 'X') break;
+				} //loop
+			} catch(ArrayIndexOutOfBoundsException ex) {
+			} //try
+			if(bFoundPiece)
+			{ //if
+				for(int j = 1; j != iaEnd[1]; j--)
+				{ //loop
+					caaGrid[iaCoord[0]][iaCoord[1]+j] = cPiece;
+				} //loop
+			} //if
+			
+			// TL-TO-BR
+			bFoundPiece = false;
+			try
+			{ //try
+				for(int i = 0, j = 0; true; i++, j--)
+				{ //loop
+					if(caaGrid[iaCoord[0]+i][iaCoord[1]+j] != cPiece)
+					{ //if
+						bFoundPiece = true;
+						iaEnd[0] = iaCoord[0]+i;
+						iaEnd[1] = iaCoord[0]+j;
+						break;
+					} //if
+					if(cPiece == 'X')
+					{      if(caaGrid[iaCoord[0]+i][iaCoord[1]+j] != 'O') break;
+					} else if(caaGrid[iaCoord[0]+i][iaCoord[1]+j] != 'X') break;
+				} //loop
+			} catch(ArrayIndexOutOfBoundsException ex) {
+			} //try
+			if(bFoundPiece)
+			{ //if
+				for(int i = 1, j = 1; (i != iaEnd[0]) && (j != iaEnd[1]); i++, j--)
+				{ //loop
+					caaGrid[iaCoord[0]+i][iaCoord[1]+j] = cPiece;
+				} //loop
+			} //if
+			
+			// BR-TO-TL
+			bFoundPiece = false;
+			try
+			{ //try
+				for(int i = 0, j = 0; true; i--, j++)
+				{ //loop
+					if(caaGrid[iaCoord[0]+i][iaCoord[1]+j] != cPiece)
+					{ //if
+						bFoundPiece = true;
+						iaEnd[0] = iaCoord[0]+i;
+						iaEnd[1] = iaCoord[0]+j;
+						break;
+					} //if
+					if(cPiece == 'X')
+					{      if(caaGrid[iaCoord[0]+i][iaCoord[1]+j] != 'O') break;
+					} else if(caaGrid[iaCoord[0]+i][iaCoord[1]+j] != 'X') break;
+				} //loop
+			} catch(ArrayIndexOutOfBoundsException ex) {
+			} //try
+			if(bFoundPiece)
+			{ //if
+				for(int i = 1, j = 1; (i != iaEnd[0]) && (j != iaEnd[1]); i++, j--)
+				{ //loop
+					caaGrid[iaCoord[0]+i][iaCoord[1]+j] = cPiece;
+				} //loop
+			} //if
+			
+			// TR-TO-BL
+			bFoundPiece = false;
+			try
+			{ //try
+				for(int i = 0, j = 0; true; i--, j--)
+				{ //loop
+					if(caaGrid[iaCoord[0]+i][iaCoord[1]+j] != cPiece)
+					{ //if
+						bFoundPiece = true;
+						iaEnd[0] = iaCoord[0]+i;
+						iaEnd[1] = iaCoord[0]+j;
+						break;
+					} //if
+					if(cPiece == 'X')
+					{      if(caaGrid[iaCoord[0]+i][iaCoord[1]+j] != 'O') break;
+					} else if(caaGrid[iaCoord[0]+i][iaCoord[1]+j] != 'X') break;
+				} //loop
+			} catch(ArrayIndexOutOfBoundsException ex) {
+			} //try
+			if(bFoundPiece)
+			{ //if
+				for(int i = 1, j = 1; (i != iaEnd[0]) && (j != iaEnd[1]); i++, j--)
+				{ //loop
+					caaGrid[iaCoord[0]+i][iaCoord[1]+j] = cPiece;
+				} //loop
+			} //if
+			
+			// BL-TO-TR
+			bFoundPiece = false;
+			try
+			{ //try
+				for(int i = 0, j = 0; true; i++, j++)
+				{ //loop
+					if(caaGrid[iaCoord[0]+i][iaCoord[1]+j] != cPiece)
+					{ //if
+						bFoundPiece = true;
+						iaEnd[0] = iaCoord[0]+i;
+						iaEnd[1] = iaCoord[0]+j;
+						break;
+					} //if
+					if(cPiece == 'X')
+					{      if(caaGrid[iaCoord[0]+i][iaCoord[1]+j] != 'O') break;
+					} else if(caaGrid[iaCoord[0]+i][iaCoord[1]+j] != 'X') break;
+				} //loop
+			} catch(ArrayIndexOutOfBoundsException ex) {
+			} //try
+			if(bFoundPiece)
+			{ //if
+				for(int i = 1, j = 1; (i != iaEnd[0]) && (j != iaEnd[1]); i++, j--)
+				{ //loop
+					caaGrid[iaCoord[0]+i][iaCoord[1]+j] = cPiece;
+				} //loop
+			} //if
+			
+		} //if
+	} //method
+	
 	////////////////////////////////////////////////////////////////////////////
-	/** Ends the game.  
-	 * @author Preston Sheppard
-	 * @param  saArgs  Arguments passed into the program from the commandline.  
+	/** Fills <code>caaGrid</code> with a new grid
+	 * @author Miles B Huff
+	 * @param  caaGrid The new grid
 	**/
-	private static void endGame(int[] iaScore)
+	public void setGrid(char[][] caaGrid)
 	{ //method
-		int xScore=iaScore[0];
-		int oScore=iaScore[1];
-		System.out.println("\n<GAME OVER>\n");
-		System.out.println("Player X Score:"+xScore+".");
-		System.out.print("Player O Score:"+oScore+".\n");
-		if (oScore>xScore) System.out.println("Congratulations Player O! You win!");
-		else if (oScore==xScore) System.out.print("Both Players tied! No gloating for you today!");
-		else System.out.println("Congratulations Player X! You win!");
-		System.exit(0);
+		for(int i = 0; i < 9; i++)
+		{ //loop
+			for(int j = 0; j < 9; j++)
+			{ //loop
+				this.caaGrid[i][j] = caaGrid[i][j];
+			} //loop
+		} //loop
 	} //method
 } //class
