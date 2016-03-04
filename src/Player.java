@@ -43,7 +43,6 @@ import java.util.Scanner;
 		 int[] getInput(char cPiece, char[][] caArray){
 					int[] input = new int[2];
 					while (true){
-					System.out.println("Enter your move, "+cPiece+" player: ");
 					String temp=keyboard.nextLine().trim();
 					if ((temp.length()!=2)||(temp.matches("[0-9]+")==false)) System.out.println("Please enter a valid input!");
 					else{
