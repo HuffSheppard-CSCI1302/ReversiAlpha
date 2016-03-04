@@ -30,14 +30,11 @@ public class Reversi
 		// Variables
 		boolean bDarkTurn     = true ;  // Dark goes first
 		boolean bOtherCanMove = false;
-
-		// Check saArgs
-		String[] sa = cleanArgs(saArgs);
 		
 		// Create players
 		for(int i = 0; i < 2; i++)
 		{ //loop
-			switch(sa[i])
+			switch(saArgs[i])
 			{ //switch
 				case "Human":
 					if(i == 0) Player oDark  = new Player.HumanPlayer;
@@ -58,7 +55,7 @@ public class Reversi
 		} //loop
 
 		// Instantiate a new game
-		Board oGrid = new ReversiBoard;
+		ReversiBoard oGrid = new ReversiBoard();
 		System.out.println("Welcome to Reversi!  Moves should be entered in \"[row] [column]\" format.  ");
 		
 		// Core game-loop
