@@ -4,7 +4,8 @@ import java.util.Scanner;
 /** Is an abstract class for player, Finds valid moves and gets input from either player or computer.
  * @author Preston Sheppard
 **/
-public abstract class Player {
+ abstract class Player {
+	
 	Scanner keyboard = new Scanner(System.in);
 	/** abstract method for getting input
 	  * @param cPiece	The <code>char</code> with which to fill the space
@@ -26,7 +27,8 @@ public abstract class Player {
  		/** A class that extends and inherits all of the abstract Player class
  		 * @author Preston Sheppard
  		**/
-	public class HumanPlayer extends Player{//good
+}
+	class HumanPlayer extends Player{//good
 		/** Is a default constructor for the human player class
 		 * @author Preston Sheppard
 		**/
@@ -57,13 +59,13 @@ public abstract class Player {
 	 * the computer doesnt immediatly place its piece.
 	 * @author Preston Sheppard
 	**/
-	public static abstract class ComputerPlayer extends Player{
+	 abstract class ComputerPlayer extends Player{
 		 /** a method that pauses the class for a set amount of time
 		 * @author Preston Sheppard
 		**/
 		 public void pause(){
 			 try {
-				    Thread.sleep(0000);                 //reset to 3000
+				    Thread.sleep(1);                 //reset to 3000
 				} catch(InterruptedException ex) {
 				    Thread.currentThread().interrupt();
 				}
@@ -93,10 +95,12 @@ public abstract class Player {
 			}//x for
 		return possibleGuessLoc; 	 	
 		 }//end possible guesses
+	}
 		 /** a class of computer player that chooses a random possible guess coordinate from possible moves
 		 * @author Preston Sheppard
 		**/
-		 public class RandomComputerPlayer extends ComputerPlayer{
+	
+		 class RandomComputerPlayer extends ComputerPlayer{
 			 /** default constructor for random computer player
 			 * @author Preston Sheppard
 			**/
@@ -120,7 +124,7 @@ public abstract class Player {
 		 /** a more intelligent computer player. This calculates what guess out of the possible guess array will yield the highest score
 		 * @author Preston Sheppard
 		**/
-		public	 class IntelligentComputerPlayer extends ComputerPlayer{
+		 class IntelligentComputerPlayer extends ComputerPlayer{
 			 /** the default constructor for intelligent computer player
 			 * @author Preston Sheppard
 			**/
@@ -156,5 +160,5 @@ public abstract class Player {
 				return compGuess; 
 			 } //end get input  
 		 }//intelligent computer
-	 	}//end computerplayer abstract
- }
+	 	
+ 
