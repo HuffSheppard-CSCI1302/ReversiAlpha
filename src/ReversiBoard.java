@@ -183,11 +183,11 @@ public class ReversiBoard implements Board
 		// Calculate '_'
 		try
 		{ //try
-			for(int k = 1; true; k++)
+			for(int k = 1; k < 9; k++)
 			{ //loop
 				try
 				{ //try
-				for(int m = 1; true; m++)
+				for(int m = 1; m < 9; m++)
 				{ //loop
 					iaCoord[0] = k;
 					iaCoord[1] = m;
@@ -456,7 +456,6 @@ public class ReversiBoard implements Board
 					} else if(caaGrid[iaCoord[0]+i][iaCoord[1]] != 'X') break;
 				} //loop
 			} catch(ArrayIndexOutOfBoundsException ex) {
-			} finally {
 			} //try
 			if(bFoundPiece)
 			{ //if
@@ -483,7 +482,6 @@ public class ReversiBoard implements Board
 					} else if(caaGrid[iaCoord[0]+i][iaCoord[1]] != 'X') break;
 				} //loop
 			} catch(ArrayIndexOutOfBoundsException ex) {
-			} finally {
 			} //try
 			if(bFoundPiece)
 			{ //if
@@ -510,7 +508,6 @@ public class ReversiBoard implements Board
 					} else if(caaGrid[iaCoord[0]][iaCoord[1]+j] != 'X') break;
 				} //loop
 			} catch(ArrayIndexOutOfBoundsException ex) {
-			} finally {
 			} //try
 			if(bFoundPiece)
 			{ //if
@@ -537,7 +534,6 @@ public class ReversiBoard implements Board
 					} else if(caaGrid[iaCoord[0]][iaCoord[1]+j] != 'X') break;
 				} //loop
 			} catch(ArrayIndexOutOfBoundsException ex) {
-			} finally {
 			} //try
 			if(bFoundPiece)
 			{ //if
@@ -565,7 +561,6 @@ public class ReversiBoard implements Board
 					} else if(caaGrid[iaCoord[0]+i][iaCoord[1]+j] != 'X') break;
 				} //loop
 			} catch(ArrayIndexOutOfBoundsException ex) {
-			} finally {
 			} //try
 			if(bFoundPiece)
 			{ //if
@@ -593,7 +588,6 @@ public class ReversiBoard implements Board
 					} else if(caaGrid[iaCoord[0]+i][iaCoord[1]+j] != 'X') break;
 				} //loop
 			} catch(ArrayIndexOutOfBoundsException ex) {
-			} finally {
 			} //try
 			if(bFoundPiece)
 			{ //if
@@ -621,7 +615,6 @@ public class ReversiBoard implements Board
 					} else if(caaGrid[iaCoord[0]+i][iaCoord[1]+j] != 'X') break;
 				} //loop
 			} catch(ArrayIndexOutOfBoundsException ex) {
-			} finally {
 			} //try
 			if(bFoundPiece)
 			{ //if
@@ -649,7 +642,6 @@ public class ReversiBoard implements Board
 					} else if(caaGrid[iaCoord[0]+i][iaCoord[1]+j] != 'X') break;
 				} //loop
 			} catch(ArrayIndexOutOfBoundsException ex) {
-			} finally {
 			} //try
 			if(bFoundPiece)
 			{ //if
