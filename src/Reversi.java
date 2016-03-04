@@ -28,8 +28,8 @@ public class Reversi
 	public static void main(String[] saArgs)
 	{ //method
 		// Variables
-		boolean bDarkTurn     = true ;  // Dark goes first
 		boolean bOtherCanMove = false;
+		char    cPiece        = 'X'  ;  // Dark goes first
 		
 		// Create players
 		for(int i = 0; i < 2; i++)
@@ -37,16 +37,16 @@ public class Reversi
 			switch(saArgs[i])
 			{ //switch
 				case "Human":
-					if(i == 0) Player oDark  = new Player.HumanPlayer;
-					else       Player oLight = new Player.HumanPlayer;
+					if(i == 0) Player oDark  = new Player.HumanPlayer(); 
+					else       Player oLight = new Player.HumanPlayer();
 					break;
 				case "RandomComputerPlayer":
-					if(i == 0) Player oDark  = new Player.ComputerPlayer.RandomComputerPlayer;
-					else       Player oLight = new Player.ComputerPlayer.RandomComputerPlayer;
+					if(i == 0) Player oDark  = new Player.ComputerPlayer.RandomComputerPlayer();
+					else       Player oLight = new Player.ComputerPlayer.RandomComputerPlayer();
 					break;
 				case "IntelligentComputerPlayer":
-					if(i == 0) Player oDark  = new Player.ComputerPlayer.IntelligentComputerPlayer;
-					else       Player oLight = new Player.ComputerPlayer.IntelligentComputerPlayer;
+					if(i == 0) Player oDark  = new Player.ComputerPlayer.IntelligentComputerPlayer();
+					else       Player oLight = new Player.ComputerPlayer.IntelligentComputerPlayer();
 					break;
 				default:
 					System.out.println("Usage:  \n$ java Reversi [Human|RandomComputerPlayer|IntelligentComputerPlayer] [Human|RandomComputerPlayer|IntelligentComputerPlayer]");
@@ -62,7 +62,7 @@ public class Reversi
 		while(true)
 		{ //loop
 			// Refresh and print the gameboard
-			oGrid.calcMoves();
+			oGrid.calcMoves(cPiece);
 			System.out.println(oGrid.toString());
 
 			// If there are moves left...  
@@ -72,7 +72,7 @@ public class Reversi
 				bOtherCanMove = true;
 
 				// Get player-input and change the grid with it
-				if(bDarkTurn)
+				if(cPiece == 'X')
 				{ //4+
 					System.out.println("Enter your move, X player:  ");
 					oGrid.update(oDark.getInput('X', oGrid.getGrid()));
@@ -90,8 +90,8 @@ public class Reversi
 			} //3-
 			
 			// Change whose turn it is
-			if(bDarkTurn) bDarkTurn = false;
-			else          bDarkTurn = true ;
+			if(cPiece == 'X') cPiece = 'O';
+			else              cPiece = 'X' ;
 		} //loop
     	} //method
 
@@ -100,7 +100,7 @@ public class Reversi
 	 * @author Preston Sheppard
 	 * @param  saArgs  Arguments passed into the program from the commandline.  
 	**/
-	private void endGame(int[] iaScore)
+	private static void endGame(int[] iaScore)
 	{ //method
 		int xScore=iaScore[0];
 		int oScore=iaScore[1];
