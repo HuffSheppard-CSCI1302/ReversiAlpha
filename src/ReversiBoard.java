@@ -22,7 +22,8 @@ public class Reversi
 { //class
 	////////////////////////////////////////////////////////////////////////////
 	/** The main method.  
-	 * @author Miles B Huff
+	 * @author Miles B Huff, 
+	 *         Preston Sheppard
 	 * @param  saArgs Arguments passed into the program from the commandline.  
 	**/
 	public static void main(String[] saArgs)
@@ -31,8 +32,8 @@ public class Reversi
 		boolean bOtherCanMove = false;
 		char    cPiece        = 'X'  ;  // Dark goes first
 		
-		Player oDark=new RandomComputerPlayer();
-		Player oLight=new HumanPlayer();
+		Player oDark  = new RandomComputerPlayer();
+		Player oLight = new HumanPlayer();
 		
 		if(saArgs.length < 2)
 		{ //if
