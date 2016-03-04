@@ -164,7 +164,9 @@ public class ReversiBoard implements Board
 	
 	////////////////////////////////////////////////////////////////////////////
 	/** Finds all possible moves.  
-	 * @author Miles B Huff
+	 * @author Miles B Huff, 
+	 *         Preston Sheppard
+	 * @param  cPiece
 	**/
 	public void calcMoves(char cPiece){ //method
 		int tempX=0;
