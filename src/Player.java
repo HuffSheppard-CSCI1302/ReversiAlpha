@@ -17,8 +17,6 @@ import java.util.Scanner;
  		**/
  		public boolean isValid(int[] ia, char[][] caArray){
  			ReversiBoard validGrid=new ReversiBoard(caArray);
- 			
- 			
  			int x=ia[0],y=ia[1];
  			if (validGrid.getGrid()[x][y]=='_') return true;
  			else return false;
@@ -44,6 +42,7 @@ import java.util.Scanner;
 					int[] input = new int[2];
 					while (true){
 					String temp=keyboard.nextLine().trim();
+					temp=temp.replaceAll(" ","");
 					if ((temp.length()!=2)||(temp.matches("[0-9]+")==false)) System.out.println("Please enter a valid input!");
 					else{
 						int intTemp=Integer.parseInt(temp);
@@ -66,118 +65,104 @@ import java.util.Scanner;
 		**/
 		 public void pause(){
 			 try {
-				    Thread.sleep(1);                 //reset to 3000
+				    Thread.sleep(2000);                 //reset to 3000
 				} catch(InterruptedException ex) {
 				    Thread.currentThread().interrupt();
 				}
 		 }//pauses the shit for a certain amount of time
-		 
-		 ////////////////////////////////////////////////////////////////////////////
-		 /** A method that scans the grid for possible moves and stores all possible 
-		  *  moves into an array to be called on later.  
-		  * @author Miles B Huff
-		 **/
-		 public int[][] getPossibleGuesses(char[][] caaGrid)
-		 { //method
-			 // Find all possible places
-			 int[][] iaaCoordBank    = new int[0][2];
-			 int[][] iaaCoordBankNew = new int[0][2];
-			 for(int i = 1; i < 9; i++)
-			 { //loop
-				 for(int j = 1; j < 9; j++)
-				 { //loop
-					 if(caaGrid[i][j] == '_')
-					 { //if
-						 iaaCoordBankNew = new int[iaaCoordBank.length + 1][2];
-						 for(int k = 0; k < iaaCoordBank.length; k++)
-						 { //loop
-							 for(int l = 0; l < 2; l++)
-							 { //loop
-								 iaaCoordBankNew[k][l] = iaaCoordBank[k][l];
-							 } //loop
-						 } //loop
-						 iaaCoordBank = iaaCoordBankNew;
-						 iaaCoordBank[iaaCoordBank.length - 1][0] = i;
-						 iaaCoordBank[iaaCoordBank.length - 1][1] = j;
-					 } //if
-				 } //loop
-			 } //loop
-			 iaaCoordBankNew = new int[0][0];
-			 return iaaCoordBank; 	 	
-		 } //method
+		 /** a method that scans the grid for possible moves and stores all possible moves into an array to be called on later
+		 * @author Preston Sheppard
+		**/
+		 public int[][] possibleGuesses(char[][] caArray){//returns a 2d array of possible guess cordinates
+			 int count=0; int [] temp=new int[2];
+			 	for (int x=0; x<9;x++){ //this just finds how many possible guess locations there are
+			 		for(int y=0; y<9;y++){
+			 			temp[0]=x;temp[1]=y;
+			 			if (isValid(temp, caArray)==true) count++; 
+			 		} //y for
+			 }//x for
+			int[][] possibleGuessLoc=new int[count][2];
+			count=0;
+			for (int x=0; x<9;x++){//this loop places all possible coordinates in the array
+		 		for(int y=0; y<9;y++){
+		 			temp[0]=x;temp[1]=y;
+		 			if (isValid(temp, caArray)==true){
+		 				possibleGuessLoc[count][0]=x;
+		 				possibleGuessLoc[count][1]=y;
+		 				count++;
+		 			}//end if 
+		 		} //y for
+			}//x for
+		return possibleGuessLoc; 	 	
+		 }//end possible guesses
 	}
-
-/** a class of computer player that chooses a random possible guess coordinate from possible moves
- * @author Preston Sheppard
-**/
-class RandomComputerPlayer extends ComputerPlayer
-{ //class
-	/** default constructor for random computer player
-	 * @author Preston Sheppard
-	**/
-	 public RandomComputerPlayer(){}
-	 /** a method that returns what the computer is going to guess for its turn
-	  * @param cPiece	The <code>char</code> with which to fill the space
-	  * @param caArray The grid that the computer is playing on
-	 * @author Preston Sheppard
-	**/
-		int[] getInput (char cPiece, char[][] caArray){
-			pause();
-			int[][] guessLoc= getPossibleGuesses(caArray);
-			int [] compGuess=new int[2];
-			Random rand=new Random();
-			
-			int randNum = rand.nextInt(guessLoc.length);
-			compGuess[0]=guessLoc[randNum][0];
-			compGuess[1]=guessLoc[randNum][1];
-			return compGuess;
-			}//ends getInput	
-	 }//end of randomcompplayer
-
-/** A more intelligent computer player.  This calculates what guess out of the 
- *  possible guess array will yield the highest score.  
- * @author Miles B Huff, 
- *         Preston Sheppard
-**/
-
-class IntelligentComputerPlayer extends ComputerPlayer
-{ //class
-	////////////////////////////////////////////////////////////////////////////
-	/** The default constructor for IntelligentComputerPlayer
-	 * @author Preston Sheppard
-	**/
-	public IntelligentComputerPlayer() {}
-
-	////////////////////////////////////////////////////////////////////////////
-	/** A method that returns what the computer is going to guess for its turn.  
-	 *  Also calculates what guess will return the highest score and then gives 
-	 *  that guess as an <code>int[]</code>.  
-	 * @param  cPiece  The <code>char</code> with which to fill the space
-	 * @param  caaGrid The gameboard
-	 * @author Miles B Huff
-	**/
-	int[] getInput (char cPiece, char[][] caaGrid){
-		pause();
-		int[][] iaaCoordBank = getPossibleGuesses(caaGrid);
-		
-		// Figure out which has the highest value
-		int iPiece = 0;
-		if(cPiece == 'O') iPiece = 1;
-		ReversiBoard oBestGrid = new ReversiBoard(caaGrid);
-		ReversiBoard oNewGrid  = new ReversiBoard(caaGrid);
-		int[] iaBest = new int[2];
-		for(int i = 0; i < iaaCoordBank.length; i++)
-		{ //loop
-				oNewGrid.setCoord(cPiece, iaaCoordBank[i]);
-				if(oNewGrid.getScore()[iPiece] > oBestGrid.getScore()[iPiece])
-				{ //loop
-					oBestGrid.setGrid(oNewGrid.getGrid());
-					iaBest = iaaCoordBank[i];
-					oNewGrid.setGrid(caaGrid);
-				} //loop
-		} //loop
-		return iaBest; 
-	} //method
-} //class
+		 /** a class of computer player that chooses a random possible guess coordinate from possible moves
+		 * @author Preston Sheppard
+		**/
+	
+		 class RandomComputerPlayer extends ComputerPlayer{
+			 /** default constructor for random computer player
+			 * @author Preston Sheppard
+			**/
+			 public RandomComputerPlayer(){}
+			 /** a method that returns what the computer is going to guess for its turn
+			  * @param cPiece	The <code>char</code> with which to fill the space
+			  * @param caArray The grid that the computer is playing on
+			 * @author Preston Sheppard
+			**/
+				int[] getInput (char cPiece, char[][] caArray){
+					pause();
+					int[][] guessLoc= possibleGuesses(caArray);
+					int [] compGuess=new int[2];
+					Random rand=new Random();
+					int randNum = rand.nextInt(guessLoc.length);
+					compGuess[0]=guessLoc[randNum][0];
+					compGuess[1]=guessLoc[randNum][1];
+					return compGuess;
+					}//ends getInput	
+			 }//end of randomcompplayer
+		 /** a more intelligent computer player. This calculates what guess out of the possible guess array will yield the highest score
+		 * @author Preston Sheppard
+		**/
+		 class IntelligentComputerPlayer extends ComputerPlayer{
+			 /** the default constructor for intelligent computer player
+			 * @author Preston Sheppard
+			**/
+			public IntelligentComputerPlayer(){}
+			/** a method that returns what the computer is going to guess for its turn. Also calculates what guess will return the highest
+			 * score and then gives that guess as an int array
+			  * @param cPiece	The <code>char</code> with which to fill the space
+			  * @param caArray The grid that the computer is playing on
+			 * @author Preston Sheppard
+			**/
+			 int [] getInput (char cPiece, char[][] caaGrid){
+				 pause();
+				 int [][] possibleGuess=possibleGuesses(caaGrid);
+				 int poop=2;
+				 if (cPiece=='X') poop=0;
+				 else if (cPiece=='O') poop=1;
+				 else{ System.out.println("BAD CODE LINE 144");
+				 System.exit(0);}
+				 ReversiBoard tempGridCheck=new ReversiBoard(caaGrid);
+				 ReversiBoard tempGridGuess=new ReversiBoard(caaGrid);
+				 int [] compGuess=new int[2];//has the guess that results in highest number of pieces in total
+				 int [] compCheck=new int[2];//this is checked agains the compGuess to see if this will result in a higher total of pieces
+				 compGuess[0]=possibleGuess[0][0];
+				 compGuess[1]=possibleGuess[0][1];
+				 for (int i=0; i<possibleGuess[0].length-1; i++){//this goes through the possible guess array and changes the compCheck to new coordinates
+					 compCheck[0]=possibleGuess[i][0]; 
+					 compCheck[1]=possibleGuess[i][1];
+					 tempGridCheck.setCoord(cPiece, compCheck);
+					 tempGridGuess.setCoord(cPiece, compGuess);
+						 if ((tempGridCheck.getScore()[poop])>(tempGridGuess.getScore()[poop])){
+							 compGuess[0]=compCheck[0]; 
+							 compGuess[1]=compGuess[1]; 
+						 } 
+						tempGridCheck.setGrid(caaGrid);
+						tempGridGuess.setGrid(caaGrid);	
+				 }//end for loop 
+				return compGuess; 
+			 } //end get input  
+			 
+		 }//intelligent computer
 	 	
- 
