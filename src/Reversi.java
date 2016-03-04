@@ -34,6 +34,11 @@ public class Reversi
 		Player oDark=new RandomComputerPlayer();
 		Player oLight=new HumanPlayer();
 		
+		if(saArgs.length < 2)
+		{ //if
+			System.out.println("Usage:  \n$ java Reversi [Human|RandomComputerPlayer|IntelligentComputerPlayer] [Human|RandomComputerPlayer|IntelligentComputerPlayer]");
+			System.exit(1);
+		} //if
 		
 		// Create players
 		for(int i = 0; i < 2; i++)
@@ -54,6 +59,7 @@ public class Reversi
 					break;
 				default:
 					System.out.println("Usage:  \n$ java Reversi [Human|RandomComputerPlayer|IntelligentComputerPlayer] [Human|RandomComputerPlayer|IntelligentComputerPlayer]");
+					System.exit(1);
 					break;
 			} //switch
 		} //loop
