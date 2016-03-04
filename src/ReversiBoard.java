@@ -164,11 +164,11 @@ public class ReversiBoard implements Board
 	
 	////////////////////////////////////////////////////////////////////////////
 	/** Finds all possible moves.  
-	 * @author Miles B Huff, 
-	 *         Preston Sheppard
+	 * @author Miles B Huff
 	 * @param  cPiece The piece to check moves for
 	**/
-	public void calcMoves(char cPiece){ //method
+	public void calcMoves(char cPiece)
+	{ //method
 		// Wipe '_'
 		for(int i = 1; i < 9; i++)
 		{ //loop
@@ -178,49 +178,240 @@ public class ReversiBoard implements Board
 			} //loop
 		} //loop
 
+		boolean bValid  = false     ;
+		int[]   iaCoord = new int[2];
+
 		// Calculate '_'
-		int tempX=0;
-		int tempY=0;
-		for(int x=0;x<9;x++){//horizontal scan to right
-			for (int y=0;y<9;y++){
-				if ((x!=0)&&(caaGrid[y][x]!=cPiece)&&(caaGrid[y][x]!='.')){
-					tempX=x-1; tempY=y;
-					//use [y][x] for the horizontal scan 
-				}
-				if ((tempY==y)&&(caaGrid[y][x]==cPiece)) caaGrid[tempX][tempY]='_';
-			}
-		}
-		
-		for(int x=0;x<9;x++){//verticle down scan
-			for (int y=0;y<9;y++){
-				if ((y!=0)&&(caaGrid[x][y]!=cPiece)&&(caaGrid[x][y]!='.')){
-					tempX=x; tempY=y-1;
-					//use [x][y] for the verticle down scan 
-				}
-				if ((tempX==x)&&(caaGrid[x][y]==cPiece)) caaGrid[tempY][tempX]='_';
-			}
-		}
-		
-		for(int x=9;x>0;x--){//horizontal left scan 
-			for (int y=0;y<9;y++){
-				if ((x!=9)&&(caaGrid[y][x]!=cPiece)&&(caaGrid[y][x]!='.')){
-					tempX=x+1; tempY=y;
-					//use [y][x] for the horizontal scan 
-				}
-				if ((tempY==y)&&(caaGrid[y][x]==cPiece)) caaGrid[tempX][tempY]='_';
-			}
-		}
-		
-		for(int x=0;x<9;x++){//verticle up scan
-			for (int y=9;y>0;y--){
-				if ((y!=9)&&(caaGrid[x][y]!=cPiece)&&(caaGrid[x][y]!='.')){
-					tempX=x; tempY=y+1;
-					//use [x][y] for the verticle down scan 
-				}
-				if ((tempX==x)&&(caaGrid[x][y]==cPiece)) caaGrid[tempY][tempX]='_';
-			}
-		}
-		
+		try
+		{ //try
+			for(int k = 1; true; k++)
+			{ //loop
+				for(int m = 1; true; m++)
+				{ //loop
+					iaCoord[0] = k;
+					iaCoord[1] = m;
+
+					// LEFT-TO-RIGHT
+					try
+					{ //try
+						for(int i = 0; true; i++)
+						{ //loop
+							if(caaGrid[iaCoord[0]][iaCoord[1]] != cPiece) break;
+							if(cPiece == 'X')
+							{ //if
+								if(caaGrid[iaCoord[0]][iaCoord[1]] != cPiece) break;
+								if(caaGrid[iaCoord[0]+i][iaCoord[1]] == 'X')
+								{ //if
+									if(caaGrid[iaCoord[0]-1][iaCoord[1]] == '.') caaGrid[iaCoord[0]-1][iaCoord[1]] = '_';
+									break;
+								} //if
+								if(caaGrid[iaCoord[0]+i][iaCoord[1]] != 'O') break;
+							} else {
+								if(caaGrid[iaCoord[0]+i][iaCoord[1]] == 'O')
+								{ //if
+									if(caaGrid[iaCoord[0]-1][iaCoord[1]] == '.') caaGrid[iaCoord[0]-1][iaCoord[1]] = '_';
+									break;
+								} //if
+								if(caaGrid[iaCoord[0]+i][iaCoord[1]] != 'X') break;
+							} //if
+						} //loop
+					} catch(ArrayIndexOutOfBoundsException ex) {
+					} finally {
+					} //try
+					
+					// RIGHT-TO-LEFT
+					try
+					{ //try
+						for(int i = 0; true; i--)
+						{ //loop
+							if(cPiece == 'X')
+							{ //if
+								if(caaGrid[iaCoord[0]][iaCoord[1]] != cPiece) break;
+								if(caaGrid[iaCoord[0]+i][iaCoord[1]] == 'X')
+								{ //if
+									if(caaGrid[iaCoord[0]+1][iaCoord[1]] == '.') caaGrid[iaCoord[0]+1][iaCoord[1]] = '_';
+									break;
+								} //if
+								if(caaGrid[iaCoord[0]+i][iaCoord[1]] != 'O') break;
+							} else {
+								if(caaGrid[iaCoord[0]+i][iaCoord[1]] == 'O')
+								{ //if
+									if(caaGrid[iaCoord[0]+1][iaCoord[1]] == '.') caaGrid[iaCoord[0]+1][iaCoord[1]] = '_';
+									break;
+								} //if
+								if(caaGrid[iaCoord[0]+i][iaCoord[1]] != 'X') break;
+							} //if
+						} //loop
+					} catch(ArrayIndexOutOfBoundsException ex) {
+					} finally {
+					} //try
+					
+					// TOP-TO-BOTTOM
+					try
+					{ //try
+						for(int j = 0; true; j--)
+						{ //loop
+							if(cPiece == 'X')
+							{ //if
+								if(caaGrid[iaCoord[0]][iaCoord[1]] != cPiece) break;
+								if(caaGrid[iaCoord[0]][iaCoord[1]+j] == 'X')
+								{ //if
+									if(caaGrid[iaCoord[0]][iaCoord[1]+1] == '.') caaGrid[iaCoord[0]][iaCoord[1]+1] = '_';
+									break;
+								} //if
+								if(caaGrid[iaCoord[0]][iaCoord[1]+j] != 'O') break;
+							} else {
+								if(caaGrid[iaCoord[0]][iaCoord[1]+j] == 'O')
+								{ //if
+									if(caaGrid[iaCoord[0]][iaCoord[1]+1] == '.') caaGrid[iaCoord[0]][iaCoord[1]+1] = '_';
+									break;
+								} //if
+								if(caaGrid[iaCoord[0]][iaCoord[1]+j] != 'X') break;
+							} //if
+						} //loop
+					} catch(ArrayIndexOutOfBoundsException ex) {
+					} finally {
+					} //try
+					
+					// BOTTOM-TO-TOP
+					try
+					{ //try
+						for(int j = 0; true; j++)
+						{ //loop
+							if(cPiece == 'X')
+							{ //if
+								if(caaGrid[iaCoord[0]][iaCoord[1]] != cPiece) break;
+								if(caaGrid[iaCoord[0]][iaCoord[1]+j] == 'X')
+								{ //if
+									if(caaGrid[iaCoord[0]][iaCoord[1]-1] == '.') caaGrid[iaCoord[0]][iaCoord[1]-1] = '_';
+									break;
+								} //if
+								if(caaGrid[iaCoord[0]][iaCoord[1]+j] != 'O') break;
+							} else {
+								if(caaGrid[iaCoord[0]][iaCoord[1]+j] == 'O')
+								{ //if
+									if(caaGrid[iaCoord[0]][iaCoord[1]-1] == '.') caaGrid[iaCoord[0]][iaCoord[1]-1] = '_';
+									break;
+								} //if
+								if(caaGrid[iaCoord[0]][iaCoord[1]+j] != 'X') break;
+							} //if
+						} //loop
+					} catch(ArrayIndexOutOfBoundsException ex) {
+					} finally {
+					} //try
+					
+					// TL-TO-BR
+					try
+					{ //try
+						for(int i = 0, j = 0; true; i++, j--)
+						{ //loop
+							if(cPiece == 'X')
+							{ //if
+								if(caaGrid[iaCoord[0]][iaCoord[1]] != cPiece) break;
+								if(caaGrid[iaCoord[0]+i][iaCoord[1]+j] == 'X')
+								{ //if
+									if(caaGrid[iaCoord[0]-1][iaCoord[1]+1] == '.') caaGrid[iaCoord[0]-1][iaCoord[1]+1] = '_';
+									break;
+								} //if
+								if(caaGrid[iaCoord[0]+i][iaCoord[1]+j] != 'O') break;
+							} else {
+								if(caaGrid[iaCoord[0]+i][iaCoord[1]+j] == 'O')
+								{ //if
+									if(caaGrid[iaCoord[0]-1][iaCoord[1]+1] == '.') caaGrid[iaCoord[0]-1][iaCoord[1]+1] = '_';
+									break;
+								} //if
+								if(caaGrid[iaCoord[0]+i][iaCoord[1]+j] != 'X') break;
+							} //if
+						} //loop
+					} catch(ArrayIndexOutOfBoundsException ex) {
+					} finally {
+					} //try
+					
+					// BR-TO-TL
+					try
+					{ //try
+						for(int i = 0, j = 0; true; i--, j++)
+						{ //loop
+							if(cPiece == 'X')
+							{ //if
+								if(caaGrid[iaCoord[0]][iaCoord[1]] != cPiece) break;
+								if(caaGrid[iaCoord[0]+i][iaCoord[1]+j] == 'X')
+								{ //if
+									if(caaGrid[iaCoord[0]+1][iaCoord[1]-1] == '.') caaGrid[iaCoord[0]+1][iaCoord[1]-1] = '_';
+									break;
+								} //if
+								if(caaGrid[iaCoord[0]+i][iaCoord[1]+j] != 'O') break;
+							} else {
+								if(caaGrid[iaCoord[0]+i][iaCoord[1]+j] == 'O')
+								{ //if
+									if(caaGrid[iaCoord[0]+1][iaCoord[1]-1] == '.') caaGrid[iaCoord[0]+1][iaCoord[1]-1] = '_';
+									break;
+								} //if
+								if(caaGrid[iaCoord[0]+i][iaCoord[1]+j] != 'X') break;
+							} //if
+						} //loop
+					} catch(ArrayIndexOutOfBoundsException ex) {
+					} finally {
+					} //try
+					
+					// TR-TO-BL
+					try
+					{ //try
+						for(int i = 0, j = 0; true; i--, j--)
+						{ //loop
+							if(cPiece == 'X')
+							{ //if
+								if(caaGrid[iaCoord[0]][iaCoord[1]] != cPiece) break;
+								if(caaGrid[iaCoord[0]+i][iaCoord[1]+j] == 'X')
+								{ //if
+									if(caaGrid[iaCoord[0]+1][iaCoord[1]+1] == '.') caaGrid[iaCoord[0]+1][iaCoord[1]+1] = '_';
+									break;
+								} //if
+								if(caaGrid[iaCoord[0]+i][iaCoord[1]+j] != 'O') break;
+							} else {
+								if(caaGrid[iaCoord[0]+i][iaCoord[1]+j] == 'O')
+								{ //if
+									if(caaGrid[iaCoord[0]+1][iaCoord[1]+1] == '.') caaGrid[iaCoord[0]+1][iaCoord[1]+1] = '_';
+									break;
+								} //if
+								if(caaGrid[iaCoord[0]+i][iaCoord[1]+j] != 'X') break;
+							} //if
+						} //loop
+					} catch(ArrayIndexOutOfBoundsException ex) {
+					} finally {
+					} //try
+					
+					// BL-TO-TR
+					try
+					{ //try
+						for(int i = 0, j = 0; true; i++, j++)
+						{ //loop
+							if(cPiece == 'X')
+							{ //if
+								if(caaGrid[iaCoord[0]][iaCoord[1]] != cPiece) break;
+								if(caaGrid[iaCoord[0]+i][iaCoord[1]+j] == 'X')
+								{ //if
+									if(caaGrid[iaCoord[0]-1][iaCoord[1]-1] == '.') caaGrid[iaCoord[0]-1][iaCoord[1]-1] = '_';
+									break;
+								} //if
+								if(caaGrid[iaCoord[0]+i][iaCoord[1]+j] != 'O') break;
+							} else {
+								if(caaGrid[iaCoord[0]+i][iaCoord[1]+j] == 'O')
+								{ //if
+									if(caaGrid[iaCoord[0]-1][iaCoord[1]-1] == '.') caaGrid[iaCoord[0]-1][iaCoord[1]-1] = '_';
+									break;
+								} //if
+								if(caaGrid[iaCoord[0]+i][iaCoord[1]+j] != 'X') break;
+							} //if
+						} //loop
+					} catch(ArrayIndexOutOfBoundsException ex) {
+					} finally {
+					} //try
+				} //loop
+			} //loop
+		} catch(ArrayIndexOutOfBoundsException ex) {
+		} finally {
+		} //try
 	} //method
 	
 	////////////////////////////////////////////////////////////////////////////
