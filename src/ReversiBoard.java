@@ -17,13 +17,13 @@ public class ReversiBoard implements Board
 		// x-axis
 		for(int i = 1; i < 9; i++)
 		{ //loop
-			caaGrid[0][i] = i;
+			caaGrid[0][i] = (char)i;
 		} //loop
 
 		// y-axis
 		for(int i = 1; i < 9; i++)
 		{ //loop
-			caaGrid[i][0] = i;
+			caaGrid[i][0] = (char)i;
 		} //loop
 
 		// center
@@ -44,13 +44,7 @@ public class ReversiBoard implements Board
 	**/
 	public ReversiBoard(char[][] caaGrid)
 	{ //method
-		for(int i = 0; i < 9; i++)
-		{ //loop
-			for(int j = 0; j < 9; j++)
-			{ //loop
-				this.caaGrid[i][j] = caaGrid[i][j];
-			} //loop
-		} //loop
+		setGrid(caaGrid);
 	} //method
 
 	////////////////////////////////////////////////////////////////////////////
@@ -58,7 +52,6 @@ public class ReversiBoard implements Board
 	 * @author Miles B Huff
 	 * @return <code>true</code> if there are moves left.  
 	**/
-	@Override
 	public boolean canMove()
 	{ //method
 		// Find '_'
@@ -79,7 +72,6 @@ public class ReversiBoard implements Board
 	 * @author Miles B Huff
 	 * @return a deep copy of <code>caaGrid</code>
 	**/
-	@Override
 	public char[][] getGrid()
 	{ //method
 		char[][] caaGrid = new char[9][9];
@@ -98,7 +90,6 @@ public class ReversiBoard implements Board
 	 * @author Miles B Huff
 	 * @return an array containing Dark and Light's scores, respectively.  
 	**/
-	@Override
 	public int[] getScore()
 	{ //method
 		int[] iaScore = new int[2];
@@ -125,14 +116,14 @@ public class ReversiBoard implements Board
 	@Override
 	public String toString()
 	{ //method
-		String s = '\n';
+		String s = "\n";
 		for(int i = 0; i < 9; i++)
 		{ //loop
 			s+= ' ';
 			for(int j = 0; j < 9; j++)
 			{ //loop
 				s+= ' ';
-				s+= caaGrid[i][j]);
+				s+= caaGrid[i][j];
 			} //loop
 		s+= '\n';
 		} //loop
@@ -143,7 +134,6 @@ public class ReversiBoard implements Board
 	/** Finds all possible moves.  
 	 * @author Miles B Huff
 	**/
-	@Override
 	public void calcMoves()
 	{ //method
 		// Wipe '_'
@@ -165,7 +155,6 @@ public class ReversiBoard implements Board
 	 * @param cPiece	The <code>char</code> with which to fill the space
 	 * @param iaCoord The coordinates of the space to fill
 	**/
-	@Override
 	public void setCoord(char cPiece, int[] iaCoord)
 	{ //method
 		if((cPiece == 'X')
@@ -175,5 +164,21 @@ public class ReversiBoard implements Board
 		} else { //if
 			caaGrid[iaCoord[0]][iaCoord[1]] = cPiece;
 		} //if
+	} //method
+	
+	////////////////////////////////////////////////////////////////////////////
+	/** Fills <code>caaGrid</code> with a new grid
+	 * @author Miles B Huff
+	 * @param  caaGrid The new grid
+	**/
+	public void setGrid(char[][] caaGrid)
+	{ //method
+		for(int i = 0; i < 9; i++)
+		{ //loop
+			for(int j = 0; j < 9; j++)
+			{ //loop
+				this.caaGrid[i][j] = caaGrid[i][j];
+			} //loop
+		} //loop
 	} //method
 } //class
