@@ -160,7 +160,7 @@ public class ReversiBoard implements Board
 		if((cPiece == 'X')
 		|| (cPiece == 'O'))
 		{ //if
-			
+			//TODO
 		} else { //if
 			caaGrid[iaCoord[0]][iaCoord[1]] = cPiece;
 		} //if
