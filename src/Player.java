@@ -81,7 +81,7 @@ public abstract class Player {
 	 
 	 
 
-	 public class InteligentComputerPlayer extends ComputerPlayer
+public	 class InteligentComputerPlayer extends ComputerPlayer
 	 {
 		 
 		 int [] getInput (char cPiece, char[][] caaGrid){
