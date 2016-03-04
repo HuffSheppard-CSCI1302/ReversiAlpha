@@ -178,8 +178,7 @@ public class ReversiBoard implements Board
 			} //loop
 		} //loop
 
-		boolean bValid  = false     ;
-		int[]   iaCoord = new int[2];
+		int[] iaCoord = new int[2];
 
 		// Calculate '_'
 		try
