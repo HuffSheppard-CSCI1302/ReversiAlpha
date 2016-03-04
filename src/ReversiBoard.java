@@ -86,23 +86,28 @@ public class ReversiBoard implements Board
 	} //method
 	
 	////////////////////////////////////////////////////////////////////////////
-	/** Calculates and returns the current score.  
+	/** Calculates and returns the current score for both X and Y, as well as the number of blank spaces.  
 	 * @author Miles B Huff
-	 * @return an array containing Dark and Light's scores, respectively.  
+	 * @return an array containing Dark and Light's scores, respectively.  Also contains the number of blank spaces.  
 	**/
 	public int[] getScore()
 	{ //method
-		int[] iaScore = new int[2];
-		for(int i = 0; i < 2; i++)
+		// Create scoreboard
+		int[] iaScore = new int[3];
+		for(int i = 0; i < 3; i++)
 		{ //loop
 			iaScore[i] = 0;
 		} //loop
-		for(int i = 0; i < 9; i++)
+		
+		// Fill scoreboard
+		for(int i = 1; i < 9; i++)
 		{ //loop
-			for(int j = 0; j < 9; j++)
+			for(int j = 1; j < 9; j++)
 			{ //loop
 				if(caaGrid[i][j] == 'X') iaScore[0]++;
 				if(caaGrid[i][j] == 'O') iaScore[1]++;
+				if(caaGrid[i][j] == '.') iaScore[2]++;
+				if(caaGrid[i][j] == '_') iaScore[2]++;
 			} //loop
 		} //loop
 		return iaScore;
@@ -152,7 +157,7 @@ public class ReversiBoard implements Board
 	////////////////////////////////////////////////////////////////////////////
 	/** Sets a single space in the grid with the specified <code>char</code>.  
 	 * @author Miles B Huff
-	 * @param cPiece	The <code>char</code> with which to fill the space
+	 * @param cPiece  The <code>char</code> with which to fill the space
 	 * @param iaCoord The coordinates of the space to fill
 	**/
 	public void setCoord(char cPiece, int[] iaCoord)
@@ -160,8 +165,15 @@ public class ReversiBoard implements Board
 		if((cPiece == 'X')
 		|| (cPiece == 'O'))
 		{ //if
-			//TODO
-		} else { //if
+			caaGrid[iaCoord[0]][iaCoord[1]] = cPiece;
+			for(int i = (iaCoord[0] - 1); i < (iaCoord[0] + 1); i++)
+			{ //loop
+				for(int j = (iaCoord[1] - 1); i < (iaCoord[1] + 1); j++)
+				{ //loop
+					if((cPiece == 'X') && (caaGrid[i][j] == 'O') || (cPiece == 'O') && (caaGrid[i][j] == 'X')) caaGrid[i][j] = cPiece;
+				} //loop
+			} //loop
+		} else {
 			caaGrid[iaCoord[0]][iaCoord[1]] = cPiece;
 		} //if
 	} //method
