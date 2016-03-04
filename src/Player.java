@@ -76,8 +76,8 @@ public abstract class Player {
 					}//ends getInput	
 			 }//end of randomcompplayer
 	
-		public	 class InteligentComputerPlayer extends ComputerPlayer{
-			public InteligentComputerPlayer(){}
+		public	 class IntelligentComputerPlayer extends ComputerPlayer{
+			public IntelligentComputerPlayer(){}
 			 int [] getInput (char cPiece, char[][] caaGrid){
 				 pause();
 				 int [][] possibleGuess=possibleGuesses();
