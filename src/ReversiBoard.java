@@ -696,7 +696,7 @@ public class ReversiBoard implements Board
 			} //try
 			if(bFoundPiece)
 			{ //if
-				for(int i = -1, j = -1; (i > (iaEnd[0] - iaCoord[0])) && (j > (iaEnd[1] - iaCoord[1])); i++, j--)
+				for(int i = -1, j = -1; (i > (iaEnd[0] - iaCoord[0])) && (j > (iaEnd[1] - iaCoord[1])); i--, j--)
 				{ //loop
 					caaGrid[iaCoord[0]+i][iaCoord[1]+j] = cPiece;
 				} //loop
@@ -723,7 +723,7 @@ public class ReversiBoard implements Board
 			} //try
 			if(bFoundPiece)
 			{ //if
-				for(int i = 1, j = 1; (i < (iaEnd[0] - iaCoord[0])) && (j < (iaEnd[1] - iaCoord[1])); i++, j--)
+				for(int i = 1, j = 1; (i < (iaEnd[0] - iaCoord[0])) && (j < (iaEnd[1] - iaCoord[1])); i++, j++)
 				{ //loop
 					caaGrid[iaCoord[0]+i][iaCoord[1]+j] = cPiece;
 				} //loop
