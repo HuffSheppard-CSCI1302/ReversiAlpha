@@ -228,6 +228,9 @@ public class ReversiBoard implements Board
 		if((cPiece == 'X')
 		|| (cPiece == 'O'))
 		{ //if
+			boolean bFoundPiece = false     ;
+			int[]   iaEnd       = new int[2];
+			
 			// Find flipping-ranges and flips their contents
 			// LEFT-TO-RIGHT
 			
@@ -238,12 +241,116 @@ public class ReversiBoard implements Board
 			// BOTTOM-TO-TOP
 			
 			// TL-TO-BR
+			bFoundPiece = false;
+			try
+			{ //try
+				for(int i = 0, j = 0; true; i++, j--)
+				{ //loop
+					if(caaGrid[iaCoord[0]+i][iaCoord[0]+j] != cPiece)
+					{ //if
+						bFoundPiece = true;
+						iaEnd[0] = iaCoord[0]+i;
+						iaEnd[1] = iaCoord[0]+j;
+						break;
+					} //if
+					if(cPiece == 'X')
+					{      if(caaGrid[iaCoord[0]+i][iaCoord[0]+j] != 'O') break;
+					} else if(caaGrid[iaCoord[0]+i][iaCoord[0]+j] != 'X') break;
+				} //loop
+			} catch(ArrayIndexOutOfBoundsException ex) {
+			} finally {
+			} //try
+			if(bFoundPiece)
+			{ //if
+				for(int i = 1, j = 1; (i != iaEnd[0]) && (i != iaEnd[1]); i++, j--)
+				{ //loop
+					caaGrid[iaCoord[0]+i][iaCoord[0]+j] = cPiece;
+				} //loop
+			} //if
 			
 			// BR-TO-TL
+			bFoundPiece = false;
+			try
+			{ //try
+				for(int i = 0, j = 0; true; i--, j++)
+				{ //loop
+					if(caaGrid[iaCoord[0]+i][iaCoord[0]+j] != cPiece)
+					{ //if
+						bFoundPiece = true;
+						iaEnd[0] = iaCoord[0]+i;
+						iaEnd[1] = iaCoord[0]+j;
+						break;
+					} //if
+					if(cPiece == 'X')
+					{      if(caaGrid[iaCoord[0]+i][iaCoord[0]+j] != 'O') break;
+					} else if(caaGrid[iaCoord[0]+i][iaCoord[0]+j] != 'X') break;
+				} //loop
+			} catch(ArrayIndexOutOfBoundsException ex) {
+			} finally {
+			} //try
+			if(bFoundPiece)
+			{ //if
+				for(int i = 1, j = 1; (i != iaEnd[0]) && (i != iaEnd[1]); i++, j--)
+				{ //loop
+					caaGrid[iaCoord[0]+i][iaCoord[0]+j] = cPiece;
+				} //loop
+			} //if
 			
 			// TR-TO-BL
+			bFoundPiece = false;
+			try
+			{ //try
+				for(int i = 0, j = 0; true; i--, j--)
+				{ //loop
+					if(caaGrid[iaCoord[0]+i][iaCoord[0]+j] != cPiece)
+					{ //if
+						bFoundPiece = true;
+						iaEnd[0] = iaCoord[0]+i;
+						iaEnd[1] = iaCoord[0]+j;
+						break;
+					} //if
+					if(cPiece == 'X')
+					{      if(caaGrid[iaCoord[0]+i][iaCoord[0]+j] != 'O') break;
+					} else if(caaGrid[iaCoord[0]+i][iaCoord[0]+j] != 'X') break;
+				} //loop
+			} catch(ArrayIndexOutOfBoundsException ex) {
+			} finally {
+			} //try
+			if(bFoundPiece)
+			{ //if
+				for(int i = 1, j = 1; (i != iaEnd[0]) && (i != iaEnd[1]); i++, j--)
+				{ //loop
+					caaGrid[iaCoord[0]+i][iaCoord[0]+j] = cPiece;
+				} //loop
+			} //if
 			
 			// BL-TO-TR
+			bFoundPiece = false;
+			try
+			{ //try
+				for(int i = 0, j = 0; true; i++, j++)
+				{ //loop
+					if(caaGrid[iaCoord[0]+i][iaCoord[0]+j] != cPiece)
+					{ //if
+						bFoundPiece = true;
+						iaEnd[0] = iaCoord[0]+i;
+						iaEnd[1] = iaCoord[0]+j;
+						break;
+					} //if
+					if(cPiece == 'X')
+					{      if(caaGrid[iaCoord[0]+i][iaCoord[0]+j] != 'O') break;
+					} else if(caaGrid[iaCoord[0]+i][iaCoord[0]+j] != 'X') break;
+				} //loop
+			} catch(ArrayIndexOutOfBoundsException ex) {
+			} finally {
+			} //try
+			if(bFoundPiece)
+			{ //if
+				for(int i = 1, j = 1; (i != iaEnd[0]) && (i != iaEnd[1]); i++, j--)
+				{ //loop
+					caaGrid[iaCoord[0]+i][iaCoord[0]+j] = cPiece;
+				} //loop
+			} //if
 			
 		} //if
 	} //method
