@@ -22,18 +22,19 @@ public class Reversi
 { //class
 	////////////////////////////////////////////////////////////////////////////
 	/** The main method.  
-	 * @author Miles B Huff
+	 * @author Miles B Huff, 
+	 *         Preston Sheppard
 	 * @param  saArgs Arguments passed into the program from the commandline.  
 	**/
 	public static void main(String[] saArgs)
 	{ //method
 		// Variables
 		boolean bOtherCanMove = false;
-		char    cPiece        = 'X'  ;  // Dark goes first
+		char    cPiece = 'X';  // Dark goes first
+		Player  oDark  = new RandomComputerPlayer();
+		Player  oLight = new HumanPlayer();
 		
-		Player oDark=new RandomComputerPlayer();
-		Player oLight=new HumanPlayer();
-		
+		// Make sure they've entered enough arguments
 		if(saArgs.length < 2)
 		{ //if
 			System.out.println("Usage:  \n$ java Reversi [Human|RandomComputerPlayer|IntelligentComputerPlayer] [Human|RandomComputerPlayer|IntelligentComputerPlayer]");
@@ -71,33 +72,39 @@ public class Reversi
 		// Core game-loop
 		while(true)
 		{ //loop
-			// Refresh and print the gameboard
+			// Refresh the gameboard
 			oGrid.calcMoves(cPiece);
-			System.out.println(oGrid.toString());
 
 			// If there are moves left...  
 			if(oGrid.canMove())
-			{ //3+
+			{ //if
+				// Print the gameboard
+				System.out.println(oGrid.toString());
+				
 				// Other player might be able to go next turn
 				bOtherCanMove = true;
 
 				// Get player-input and change the grid with it
 				if(cPiece == 'X')
-				{ //4+
+				{ //if
 					System.out.println("Enter your move, X player:  ");
 					oGrid.setCoord('X', oDark.getInput('X', oGrid.getGrid()));
-				} else { //4=
+				} else {
 					System.out.println("Enter your move, O player:  ");
 					oGrid.setCoord('O', oLight.getInput('O', oGrid.getGrid()));
-				} //4-
+				} //if
 
 			// If there are no moves left...  
-			} else { //3=
+			} else {
 				// If the other player could still move last turn...  
 				if(bOtherCanMove) bOtherCanMove = false;
 				// If neither player can move, the game is over.  
-				else endGame(oGrid.getScore());
-			} //3-
+				else
+				{
+					System.out.println(oGrid.toString());
+					endGame(oGrid.getScore());
+				}
+			} //if
 			
 			// Change whose turn it is
 			if(cPiece == 'X') cPiece = 'O';
@@ -114,12 +121,12 @@ public class Reversi
 	{ //method
 		int xScore=iaScore[0];
 		int oScore=iaScore[1];
-		System.out.println("\n<GAME OVER>\n");
+		System.out.println("<GAME OVER>\n");
 		System.out.println("Player X Score:"+xScore+".");
 		System.out.print("Player O Score:"+oScore+".\n");
-		if (oScore>xScore) System.out.println("Congratulations Player O! You win!");
-		else if (oScore==xScore) System.out.print("Both Players tied! No gloating for you today!");
-		else System.out.println("Congratulations Player X! You win!");
+		if (oScore>xScore) System.out.println("\nCongratulations Player O! You win!");
+		else if (oScore==xScore) System.out.print("\nBoth Players tied! No gloating for you today!");
+		else System.out.println("\nCongratulations Player X! You win!");
 		System.exit(0);
 	} //method
 } //class
