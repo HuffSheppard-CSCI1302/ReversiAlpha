@@ -218,13 +218,6 @@ public class ReversiBoard implements Board
 	 * @author Miles B Huff
 	 * @param cPiece  The <code>char</code> with which to fill the space
 	 * @param iaCoord The coordinates of the space to fill
-	**/	////////////////////////////////////////////////////////////////////////////
-	/** Sets a single space in the grid with the specified <code>char</code>.  
-	 *  If the character used to fill that space happens to be a player's piece, 
-	 *  then also flip things.  
-	 * @author Miles B Huff
-	 * @param cPiece  The <code>char</code> with which to fill the space
-	 * @param iaCoord The coordinates of the space to fill
 	**/
 	public void setCoord(char cPiece, int[] iaCoord)
 	{ //method
