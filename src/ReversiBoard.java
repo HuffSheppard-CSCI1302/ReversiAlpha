@@ -218,6 +218,13 @@ public class ReversiBoard implements Board
 	 * @author Miles B Huff
 	 * @param cPiece  The <code>char</code> with which to fill the space
 	 * @param iaCoord The coordinates of the space to fill
+	**/	////////////////////////////////////////////////////////////////////////////
+	/** Sets a single space in the grid with the specified <code>char</code>.  
+	 *  If the character used to fill that space happens to be a player's piece, 
+	 *  then also flip things.  
+	 * @author Miles B Huff
+	 * @param cPiece  The <code>char</code> with which to fill the space
+	 * @param iaCoord The coordinates of the space to fill
 	**/
 	public void setCoord(char cPiece, int[] iaCoord)
 	{ //method
@@ -233,12 +240,112 @@ public class ReversiBoard implements Board
 			
 			// Find flipping-ranges and flips their contents
 			// LEFT-TO-RIGHT
+			bFoundPiece = false;
+			try
+			{ //try
+				for(int i = 0; true; i++)
+				{ //loop
+					if(caaGrid[iaCoord[0]+i][iaCoord[1]] != cPiece)
+					{ //if
+						bFoundPiece = true;
+						iaEnd[0] = iaCoord[0]+i;
+						break;
+					} //if
+					if(cPiece == 'X')
+					{      if(caaGrid[iaCoord[0]+i][iaCoord[1]] != 'O') break;
+					} else if(caaGrid[iaCoord[0]+i][iaCoord[1]] != 'X') break;
+				} //loop
+			} catch(ArrayIndexOutOfBoundsException ex) {
+			} finally {
+			} //try
+			if(bFoundPiece)
+			{ //if
+				for(int i = 1; i != iaEnd[0]; i++)
+				{ //loop
+					caaGrid[iaCoord[0]+i][iaCoord[1]] = cPiece;
+				} //loop
+			} //if
 			
 			// RIGHT-TO-LEFT
+			bFoundPiece = false;
+			try
+			{ //try
+				for(int i = 0; true; i--)
+				{ //loop
+					if(caaGrid[iaCoord[0]+i][iaCoord[1]] != cPiece)
+					{ //if
+						bFoundPiece = true;
+						iaEnd[0] = iaCoord[0]+i;
+						break;
+					} //if
+					if(cPiece == 'X')
+					{      if(caaGrid[iaCoord[0]+i][iaCoord[1]] != 'O') break;
+					} else if(caaGrid[iaCoord[0]+i][iaCoord[1]] != 'X') break;
+				} //loop
+			} catch(ArrayIndexOutOfBoundsException ex) {
+			} finally {
+			} //try
+			if(bFoundPiece)
+			{ //if
+				for(int i = 1; i != iaEnd[0]; i--)
+				{ //loop
+					caaGrid[iaCoord[0]+i][iaCoord[1]] = cPiece;
+				} //loop
+			} //if
 			
 			// TOP-TO-BOTTOM
+			bFoundPiece = false;
+			try
+			{ //try
+				for(int j = 0; true; j--)
+				{ //loop
+					if(caaGrid[iaCoord[0]][iaCoord[1]+j] != cPiece)
+					{ //if
+						bFoundPiece = true;
+						iaEnd[1] = iaCoord[0]+j;
+						break;
+					} //if
+					if(cPiece == 'X')
+					{      if(caaGrid[iaCoord[0]][iaCoord[1]+j] != 'O') break;
+					} else if(caaGrid[iaCoord[0]][iaCoord[1]+j] != 'X') break;
+				} //loop
+			} catch(ArrayIndexOutOfBoundsException ex) {
+			} finally {
+			} //try
+			if(bFoundPiece)
+			{ //if
+				for(int j = 1; j != iaEnd[1]; j--)
+				{ //loop
+					caaGrid[iaCoord[0]][iaCoord[1]+j] = cPiece;
+				} //loop
+			} //if
 			
 			// BOTTOM-TO-TOP
+			bFoundPiece = false;
+			try
+			{ //try
+				for(int j = 0; true; j++)
+				{ //loop
+					if(caaGrid[iaCoord[0]][iaCoord[1]+j] != cPiece)
+					{ //if
+						bFoundPiece = true;
+						iaEnd[1] = iaCoord[0]+j;
+						break;
+					} //if
+					if(cPiece == 'X')
+					{      if(caaGrid[iaCoord[0]][iaCoord[1]+j] != 'O') break;
+					} else if(caaGrid[iaCoord[0]][iaCoord[1]+j] != 'X') break;
+				} //loop
+			} catch(ArrayIndexOutOfBoundsException ex) {
+			} finally {
+			} //try
+			if(bFoundPiece)
+			{ //if
+				for(int j = 1; j != iaEnd[1]; j--)
+				{ //loop
+					caaGrid[iaCoord[0]][iaCoord[1]+j] = cPiece;
+				} //loop
+			} //if
 			
 			// TL-TO-BR
 			bFoundPiece = false;
@@ -246,7 +353,7 @@ public class ReversiBoard implements Board
 			{ //try
 				for(int i = 0, j = 0; true; i++, j--)
 				{ //loop
-					if(caaGrid[iaCoord[0]+i][iaCoord[0]+j] != cPiece)
+					if(caaGrid[iaCoord[0]+i][iaCoord[1]+j] != cPiece)
 					{ //if
 						bFoundPiece = true;
 						iaEnd[0] = iaCoord[0]+i;
@@ -254,17 +361,17 @@ public class ReversiBoard implements Board
 						break;
 					} //if
 					if(cPiece == 'X')
-					{      if(caaGrid[iaCoord[0]+i][iaCoord[0]+j] != 'O') break;
-					} else if(caaGrid[iaCoord[0]+i][iaCoord[0]+j] != 'X') break;
+					{      if(caaGrid[iaCoord[0]+i][iaCoord[1]+j] != 'O') break;
+					} else if(caaGrid[iaCoord[0]+i][iaCoord[1]+j] != 'X') break;
 				} //loop
 			} catch(ArrayIndexOutOfBoundsException ex) {
 			} finally {
 			} //try
 			if(bFoundPiece)
 			{ //if
-				for(int i = 1, j = 1; (i != iaEnd[0]) && (i != iaEnd[1]); i++, j--)
+				for(int i = 1, j = 1; (i != iaEnd[0]) && (j != iaEnd[1]); i++, j--)
 				{ //loop
-					caaGrid[iaCoord[0]+i][iaCoord[0]+j] = cPiece;
+					caaGrid[iaCoord[0]+i][iaCoord[1]+j] = cPiece;
 				} //loop
 			} //if
 			
@@ -274,7 +381,7 @@ public class ReversiBoard implements Board
 			{ //try
 				for(int i = 0, j = 0; true; i--, j++)
 				{ //loop
-					if(caaGrid[iaCoord[0]+i][iaCoord[0]+j] != cPiece)
+					if(caaGrid[iaCoord[0]+i][iaCoord[1]+j] != cPiece)
 					{ //if
 						bFoundPiece = true;
 						iaEnd[0] = iaCoord[0]+i;
@@ -282,17 +389,17 @@ public class ReversiBoard implements Board
 						break;
 					} //if
 					if(cPiece == 'X')
-					{      if(caaGrid[iaCoord[0]+i][iaCoord[0]+j] != 'O') break;
-					} else if(caaGrid[iaCoord[0]+i][iaCoord[0]+j] != 'X') break;
+					{      if(caaGrid[iaCoord[0]+i][iaCoord[1]+j] != 'O') break;
+					} else if(caaGrid[iaCoord[0]+i][iaCoord[1]+j] != 'X') break;
 				} //loop
 			} catch(ArrayIndexOutOfBoundsException ex) {
 			} finally {
 			} //try
 			if(bFoundPiece)
 			{ //if
-				for(int i = 1, j = 1; (i != iaEnd[0]) && (i != iaEnd[1]); i++, j--)
+				for(int i = 1, j = 1; (i != iaEnd[0]) && (j != iaEnd[1]); i++, j--)
 				{ //loop
-					caaGrid[iaCoord[0]+i][iaCoord[0]+j] = cPiece;
+					caaGrid[iaCoord[0]+i][iaCoord[1]+j] = cPiece;
 				} //loop
 			} //if
 			
@@ -302,7 +409,7 @@ public class ReversiBoard implements Board
 			{ //try
 				for(int i = 0, j = 0; true; i--, j--)
 				{ //loop
-					if(caaGrid[iaCoord[0]+i][iaCoord[0]+j] != cPiece)
+					if(caaGrid[iaCoord[0]+i][iaCoord[1]+j] != cPiece)
 					{ //if
 						bFoundPiece = true;
 						iaEnd[0] = iaCoord[0]+i;
@@ -310,17 +417,17 @@ public class ReversiBoard implements Board
 						break;
 					} //if
 					if(cPiece == 'X')
-					{      if(caaGrid[iaCoord[0]+i][iaCoord[0]+j] != 'O') break;
-					} else if(caaGrid[iaCoord[0]+i][iaCoord[0]+j] != 'X') break;
+					{      if(caaGrid[iaCoord[0]+i][iaCoord[1]+j] != 'O') break;
+					} else if(caaGrid[iaCoord[0]+i][iaCoord[1]+j] != 'X') break;
 				} //loop
 			} catch(ArrayIndexOutOfBoundsException ex) {
 			} finally {
 			} //try
 			if(bFoundPiece)
 			{ //if
-				for(int i = 1, j = 1; (i != iaEnd[0]) && (i != iaEnd[1]); i++, j--)
+				for(int i = 1, j = 1; (i != iaEnd[0]) && (j != iaEnd[1]); i++, j--)
 				{ //loop
-					caaGrid[iaCoord[0]+i][iaCoord[0]+j] = cPiece;
+					caaGrid[iaCoord[0]+i][iaCoord[1]+j] = cPiece;
 				} //loop
 			} //if
 			
@@ -330,7 +437,7 @@ public class ReversiBoard implements Board
 			{ //try
 				for(int i = 0, j = 0; true; i++, j++)
 				{ //loop
-					if(caaGrid[iaCoord[0]+i][iaCoord[0]+j] != cPiece)
+					if(caaGrid[iaCoord[0]+i][iaCoord[1]+j] != cPiece)
 					{ //if
 						bFoundPiece = true;
 						iaEnd[0] = iaCoord[0]+i;
@@ -338,17 +445,17 @@ public class ReversiBoard implements Board
 						break;
 					} //if
 					if(cPiece == 'X')
-					{      if(caaGrid[iaCoord[0]+i][iaCoord[0]+j] != 'O') break;
-					} else if(caaGrid[iaCoord[0]+i][iaCoord[0]+j] != 'X') break;
+					{      if(caaGrid[iaCoord[0]+i][iaCoord[1]+j] != 'O') break;
+					} else if(caaGrid[iaCoord[0]+i][iaCoord[1]+j] != 'X') break;
 				} //loop
 			} catch(ArrayIndexOutOfBoundsException ex) {
 			} finally {
 			} //try
 			if(bFoundPiece)
 			{ //if
-				for(int i = 1, j = 1; (i != iaEnd[0]) && (i != iaEnd[1]); i++, j--)
+				for(int i = 1, j = 1; (i != iaEnd[0]) && (j != iaEnd[1]); i++, j--)
 				{ //loop
-					caaGrid[iaCoord[0]+i][iaCoord[0]+j] = cPiece;
+					caaGrid[iaCoord[0]+i][iaCoord[1]+j] = cPiece;
 				} //loop
 			} //if
 			
