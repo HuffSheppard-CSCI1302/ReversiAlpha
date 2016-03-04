@@ -75,10 +75,10 @@ public class Reversi
 				if(bDarkTurn)
 				{ //4+
 					System.out.println("Enter your move, X player:  ");
-					grid.update(oDark.getInput('X', oGrid.getGrid()));
+					oGrid.update(oDark.getInput('X', oGrid.getGrid()));
 				} else { //4=
 					System.out.println("Enter your move, O player:  ");
-					grid.update(oLight.getInput('O', oGrid.getGrid()));
+					oGrid.update(oLight.getInput('O', oGrid.getGrid()));
 				} //4-
 
 			// If there are no moves left...  
@@ -86,7 +86,7 @@ public class Reversi
 				// If the other player could still move last turn...  
 				if(bOtherCanMove) bOtherCanMove = false;
 				// If neither player can move, the game is over.  
-				else oGrid.endGame(oGrid.getScore());
+				else endGame(oGrid.getScore());
 			} //3-
 			
 			// Change whose turn it is
@@ -100,7 +100,7 @@ public class Reversi
 	 * @author Preston Sheppard
 	 * @param  saArgs  Arguments passed into the program from the commandline.  
 	**/
-	private void endGame(int[] iaScore)
+	private static void endGame(int[] iaScore)
 	{ //method
 		//TODO
 	} //method
