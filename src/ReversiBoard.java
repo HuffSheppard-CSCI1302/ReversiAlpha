@@ -169,6 +169,16 @@ public class ReversiBoard implements Board
 	 * @param  cPiece The piece to check moves for
 	**/
 	public void calcMoves(char cPiece){ //method
+		// Wipe '_'
+		for(int i = 1; i < 9; i++)
+		{ //loop
+			for(int j = 1; j < 9; j++)
+			{ //loop
+				if(caaGrid[i][j] == '_') caaGrid[i][j] = '.';
+			} //loop
+		} //loop
+
+		// Calculate '_'
 		int tempX=0;
 		int tempY=0;
 		for(int x=0;x<9;x++){//horizontal scan to right
