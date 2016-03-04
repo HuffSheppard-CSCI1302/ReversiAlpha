@@ -20,7 +20,7 @@
 
 public class ReversiBoard implements Board
 { //class
-	private char[][] caaGrid;
+	private char[][] caaGrid=new char[9][9];
 	/* KEY: 
 	 * '.' = empty
 	 * 'X' = Dark (player 1)
