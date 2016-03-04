@@ -30,11 +30,11 @@ public class Reversi
 	{ //method
 		// Variables
 		boolean bOtherCanMove = false;
-		char    cPiece        = 'X'  ;  // Dark goes first
+		char    cPiece = 'X';  // Dark goes first
+		Player  oDark  = new RandomComputerPlayer();
+		Player  oLight = new HumanPlayer();
 		
-		Player oDark  = new RandomComputerPlayer();
-		Player oLight = new HumanPlayer();
-		
+		// Make sure they've entered enough arguments
 		if(saArgs.length < 2)
 		{ //if
 			System.out.println("Usage:  \n$ java Reversi [Human|RandomComputerPlayer|IntelligentComputerPlayer] [Human|RandomComputerPlayer|IntelligentComputerPlayer]");
