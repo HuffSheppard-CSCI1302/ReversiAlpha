@@ -168,6 +168,12 @@ public class ReversiBoard implements Board
 	@Override
 	public void setCoord(char cPiece, int[] iaCoord)
 	{ //method
-		caaGrid[iaCoord[0]][iaCoord[1]] = cPiece;
+		if((cPiece == 'X')
+		|| (cPiece == 'O'))
+		{ //if
+			
+		} else { //if
+			caaGrid[iaCoord[0]][iaCoord[1]] = cPiece;
+		} //if
 	} //method
 } //class
