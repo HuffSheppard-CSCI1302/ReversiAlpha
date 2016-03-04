@@ -100,8 +100,17 @@ public class Reversi
 	 * @author Preston Sheppard
 	 * @param  saArgs  Arguments passed into the program from the commandline.  
 	**/
-	private static void endGame(int[] iaScore)
+	private void endGame(int[] iaScore)
 	{ //method
-		//TODO
+		int xScore=SCORE SHIT;
+		int oScore=SCORE SHIT;
+		System.out.println("\n<GAME OVER>\n");
+		System.out.println("Player X Score:"+xScore+".");
+		System.out.print("Player O Score:"+oScore+".\n");
+		if (oScore>xScore) System.out.println("Congratulations Player O! You win!");
+		else if (oScore==xScore) System.out.print("Both Players tied! No gloating for you today!");
+		else System.out.println("Congratulations Player X! You win!");
+		System.exit(0);
+	
 	} //method
 } //class
