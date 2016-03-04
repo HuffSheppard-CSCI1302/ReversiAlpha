@@ -1,18 +1,41 @@
 import java.util.Random;
 import java.util.Scanner;
 
+/** Is an abstract class for player, Finds valid moves and gets input from either player or computer.
+ * @author Preston Sheppard
+**/
 public abstract class Player {
 	Scanner keyboard = new Scanner(System.in);
+	/** abstract method for getting input
+	  * @param cPiece	The <code>char</code> with which to fill the space
+	  * @param caArray The grid that the user is playing on
+	 * @author Preston Sheppard
+	**/
  		abstract int[] getInput(char cPiece, char[][] caArray);
+ 		/** boolean method to see if an input is actually a valid move
+ 		  * @param ia The coordinates of the space to check
+ 		 * @author Preston Sheppard
+ 		**/
  		public boolean isValid(int[] ia){
  			char[][] validGrid=new char [9][9];//Reversi.getGrid();
  			int x=ia[0],y=ia[1];
  			if (validGrid[x][y]=='_') return true;
  			else return false;
  		}
-
+ 		
+ 		/** A class that extends and inherits all of the abstract Player class
+ 		 * @author Preston Sheppard
+ 		**/
 	public class HumanPlayer extends Player{//good
+		/** Is a default constructor for the human player class
+		 * @author Preston Sheppard
+		**/
 		 public HumanPlayer(){}
+		 /** a method that overloads the abstract method of getting an input
+		  * @param cPiece	The <code>char</code> with which to fill the space
+		  * @param caArray The grid that the user is playing on
+		 * @author Preston Sheppard
+		**/
 		 int[] getInput(char cPiece, char[][] caArray){
 					int[] input = new int[2];
 					while (true){
@@ -30,8 +53,14 @@ public abstract class Player {
 						}//ends the while true loop
 					}//ends getinput	
 		 		}//ends human player
-	 
+	/** Is an abstract class for computer player, Finds valid moves and puts them into an array. Also, has a pause in it so that
+	 * the computer doesnt immediatly place its piece.
+	 * @author Preston Sheppard
+	**/
 	public static abstract class ComputerPlayer extends Player{
+		 /** a method that pauses the class for a set amount of time
+		 * @author Preston Sheppard
+		**/
 		 public void pause(){
 			 try {
 				    Thread.sleep(0000);                 //reset to 3000
@@ -39,6 +68,9 @@ public abstract class Player {
 				    Thread.currentThread().interrupt();
 				}
 		 }//pauses the shit for a certain amount of time
+		 /** a method that scans the grid for possible moves and stores all possible moves into an array to be called on later
+		 * @author Preston Sheppard
+		**/
 		 public int[][] possibleGuesses(){//returns a 2d array of possible guess cordinates
 			 int count=0; int [] temp=new int[2];
 			 	for (int x=0; x<9;x++){ //this just finds how many possible guess locations there are
@@ -61,9 +93,19 @@ public abstract class Player {
 			}//x for
 		return possibleGuessLoc; 	 	
 		 }//end possible guesses
-		
+		 /** a class of computer player that chooses a random possible guess coordinate from possible moves
+		 * @author Preston Sheppard
+		**/
 		 public class RandomComputerPlayer extends ComputerPlayer{
+			 /** default constructor for random computer player
+			 * @author Preston Sheppard
+			**/
 			 public RandomComputerPlayer(){}
+			 /** a method that returns what the computer is going to guess for its turn
+			  * @param cPiece	The <code>char</code> with which to fill the space
+			  * @param caArray The grid that the computer is playing on
+			 * @author Preston Sheppard
+			**/
 				int[] getInput (char cPiece, char[][] caArray){
 					pause();
 					int[][] guessLoc= possibleGuesses();
@@ -75,9 +117,20 @@ public abstract class Player {
 					return compGuess;
 					}//ends getInput	
 			 }//end of randomcompplayer
-	
+		 /** a more intelligent computer player. This calculates what guess out of the possible guess array will yield the highest score
+		 * @author Preston Sheppard
+		**/
 		public	 class IntelligentComputerPlayer extends ComputerPlayer{
+			 /** the default constructor for intelligent computer player
+			 * @author Preston Sheppard
+			**/
 			public IntelligentComputerPlayer(){}
+			/** a method that returns what the computer is going to guess for its turn. Also calculates what guess will return the highest
+			 * score and then gives that guess as an int array
+			  * @param cPiece	The <code>char</code> with which to fill the space
+			  * @param caArray The grid that the computer is playing on
+			 * @author Preston Sheppard
+			**/
 			 int [] getInput (char cPiece, char[][] caaGrid){
 				 pause();
 				 int [][] possibleGuess=possibleGuesses();
