@@ -10,6 +10,6 @@ public interface Board
   public  int[]    getScore() ;
   public  void     calcMoves();
   public  void     setCoord(char cPiece, int[] iaCoord);
-  public  void     setCoord(char[][] caaGrid);
+  public  void     setGrid(char[][] caaGrid);
   
 } //interface
