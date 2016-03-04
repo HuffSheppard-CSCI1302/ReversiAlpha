@@ -20,7 +20,7 @@
 
 public class ReversiBoard implements Board
 { //class
-	private char[][] caaGrid = new char[9][9];
+	private char[][] caaGrid;
 	/* KEY: 
 	 * '.' = empty
 	 * 'X' = Dark (player 1)
@@ -185,6 +185,8 @@ public class ReversiBoard implements Board
 		{ //try
 			for(int k = 1; true; k++)
 			{ //loop
+				try
+				{ //try
 				for(int m = 1; true; m++)
 				{ //loop
 					iaCoord[0] = k;
@@ -407,6 +409,9 @@ public class ReversiBoard implements Board
 					} finally {
 					} //try
 				} //loop
+				} catch(ArrayIndexOutOfBoundsException ex) {
+				} finally {
+				} //try
 			} //loop
 		} catch(ArrayIndexOutOfBoundsException ex) {
 		} finally {
