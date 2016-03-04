@@ -199,10 +199,22 @@ public class ReversiBoard implements Board
 		|| (cPiece == 'O'))
 		{ //if
 			// Find flipping-ranges and flips their contents
-			for(int i = 0; i < 8; i++)
-			{ //loop
-				
-			} //loop
+			// LEFT-TO-RIGHT
+			
+			// RIGHT-TO-LEFT
+			
+			// TOP-TO-BOTTOM
+			
+			// BOTTOM-TO-TOP
+			
+			// TL-TO-BR
+			
+			// BR-TO-TL
+			
+			// TR-TO-BL
+			
+			// BL-TO-TR
+			
 		} //if
 	} //method
 	
