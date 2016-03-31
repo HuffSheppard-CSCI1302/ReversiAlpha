@@ -21,7 +21,7 @@ public interface Board
 { //interface
   
   // Variables
-  public char[][] caaGrid = new char[9][9];
+  public char[][] caaGrid = new char[9][9] ;
   
   // Methods
   public  boolean  canMove()  ;
