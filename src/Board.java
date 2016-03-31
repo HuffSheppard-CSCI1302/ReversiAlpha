@@ -19,16 +19,16 @@
 
 public interface Board
 { //interface
-  
+
   // Variables
   public char[][] caaGrid = new char[9][9];
-  
+
   // Methods
-  public  boolean  canMove() ;
-  public  char[][] getGrid() ;
-  public  int[]    getScore();
-  public  void     calcMoves(char cPiece);
-  public  void     setCoord(char cPiece, int[] iaCoord);
-  public  void     setGrid(char[][] caaGrid);
-  
+  public boolean  canMove  ();
+  public char[][] getGrid  ();
+  public int []   getScore ();
+  public void     calcMoves(char cPiece);
+  public void     setCoord (char cPiece, int[] iaCoord);
+  public void     setGrid  (char[][] caaGrid);
+
 } //interface
