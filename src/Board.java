@@ -27,9 +27,9 @@ public interface Board
   public boolean  canMove();
   public char[][] getGrid();
   public  int[]  getScore();
-  public void   calcMoves(char     cPiece );
-  public void    setCoord(char     cPiece  , 
-                           int[]   iaCoord);
-  public void     setGrid(char[][] caaGrid);
+  public void   calcMoves(char       cPiece);
+  public void    setCoord(char       cPiece , 
+                           int[]    iaCoord);
+  public void     setGrid(char[][] caaGrid );
 
 } //interface
