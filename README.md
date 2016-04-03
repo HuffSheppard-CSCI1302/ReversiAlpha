@@ -1,9 +1,9 @@
 # ReversiAlpha
 A school-project.  Implements Reversi with some abstract methods and such.  Really overkill.  
 
-Code is copyright © 2016 Miles B Huff and Preston Sheppard LGPL3.0 (The Lesser GNU Public License version 3.0).  
+Code is copyrighted © 2016 by Miles B Huff and Preston Sheppard per LGPL3.0 (The Lesser GNU Public License version 3.0).  
 
-Other materials are copyright © 2016 Miles B Huff and Preston Sheppard CC-BY-SA 4.0 Int'l (Creative Commons Attribution-ShareAlike version 4.0 International)
+Other materials are copyrighted © 2016 by Miles B Huff and Preston Sheppard per CC-BY-SA 4.0 Int'l (Creative Commons Attribution-ShareAlike version 4.0 International)
 
 # Usage
 <code>$ java Reversi <i>$1</i> <i>$2</i></code>
